@@ -1,0 +1,110 @@
+.ranking {
+	
+}
+
+.game_listing {
+	margin: 5px auto;
+	max-width: 900px;
+	height: 45px;
+	background-color: rgba(27, 40, 56, 0.5);
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
+}
+
+.game_listing img {
+	vertical-align: top;
+}
+
+.game_ranking {
+	flex-grow: 0;
+	margin: auto 0.3vw;
+	font-size: 2em;
+}
+
+.game_title_tags {
+	margin: auto 0;
+	flex-grow: 4;
+	display: inline-block;
+}
+
+.game_title {
+	display: flex;
+}
+
+.game_tags {
+	margin: 0;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.game_tags span {
+	font-size: 0.7em;
+	border-radius: 2px;
+	padding: 1px 3px;
+	background-color: rgba(103, 193, 245, 0.2);
+	color: #67c1f5;
+}
+
+.game_release_platforms {
+	margin: auto 0;
+	flex-grow: 1;
+	display: inline-block;
+	text-align: center;
+}
+
+.game_release {
+	color: #5c9ccc;
+	font-size: 0.75em;
+	display: block;
+}
+
+.game_platforms {
+	margin: 0;
+	display: inline-block;
+}
+
+.win_icon {
+	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_win.png?v=3");
+	opacity: 0.3;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+
+.mac_icon {
+	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_mac.png");
+	opacity: 0.3;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+
+.linux_icon {
+	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_linux.png");
+	opacity: 0.3;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+
+.game_score_reviews {
+	margin: auto 0.3vw;
+	display: inline-block;
+	font-size: 0.75em;
+	text-align: center;
+}
+
+.game_score {
+	margin: 0;
+	display: block;
+}
+
+.game_score span {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.game_reviews {
+	display: inline-block;
+}
