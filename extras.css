@@ -1,4 +1,72 @@
 .extras {
 	background-color: #171a21;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.extras_buttons {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.id_card {
+	margin: 1em;
+}
+
+.id_card img {
+	vertical-align: middle;
+	width: 5em;
+}
+
+.donate_button {
+	margin: 1em;
+}
+
+.donate_button a {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #171a21;
+	background-color: #ff9400;
+	border-radius: 20px;
+	padding: 2px 10px;
+}
+
+.donate_button a:hover {
+	background-color: rgba(255, 148, 0, 0.8);
+}
+
+.newsletter {
+	margin: 1em;
+}
+
+.newsletter input {
+	display: block;
+}
+
+.newsletter input[type=text] {
 	text-align: center;
+	background-color: #171a21;
+	color: #c6d4df;
+}
+
+.button {
+	background-color: #3c3f4c;
+	color: #c6d4df;
+	border-radius: 10px;
+	margin-top: 0.2em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.button:hover {
+	background-color: rgba(60, 63, 66, 0.5);
+}
+
+#google_maps {
+	height: 360px;
+	width: 640px;
 }

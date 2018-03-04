@@ -1,0 +1,19 @@
+.stats {
+	background-color: #171a21;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.stats div {
+	font-size: 1.5em;
+}
+
+.stats ol {
+	font-size: 0.67em;
+}
+
+.stats_item {
+	display: flex;
+	justify-content: space-between;
+}

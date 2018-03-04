@@ -1,6 +1,7 @@
-<?php
-include 'pieces/header.php';
-?>
+<?php include 'pieces/head.php';?>
+<link href="about.css" rel="stylesheet" type="text/css"/>
+</head>
+<?php include 'pieces/header.php';?>
 
 <div class="about">
 	<p>
@@ -14,6 +15,4 @@ include 'pieces/header.php';
 	</p>
 </div>
 
-<?php
-include 'pieces/footer.php';
-?>
+<?php include 'pieces/footer.php';?>
