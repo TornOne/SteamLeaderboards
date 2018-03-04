@@ -1,0 +1,10 @@
+.about {
+	background-color: #171a21;
+}
+
+.about p {
+	margin: auto;
+	padding: 0.5em 0;
+	max-width: 900px;
+	text-align: justify;
+}

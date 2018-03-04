@@ -1,0 +1,58 @@
+body {
+	font-family: sans-serif;
+	color: #c6d4df;
+	background-image: url("/images/background.jpg");
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-attachment: fixed;
+	background-color: #1B2838;
+	background-size: cover;
+	margin: 0
+}
+
+a {
+	text-decoration: none;
+	color: #c6d4df;
+}
+
+.header {
+	text-align: center;
+	background-color: #171a21;
+}
+
+.footer {
+	padding: 1em;
+	text-align: center;
+	background-color: #171a21;
+}
+
+.title {
+	font-variant: small-caps;
+	font-weight: bold;
+	font-size: 3em;
+}
+
+.navigation_bar {
+	background-color: #171a21;
+	padding: 0.5em;
+}
+
+.navigation_bar a {
+	text-align: center;
+	padding: 1em;
+}
+
+.right_corner {
+	position: absolute;
+	right: 0.5em;
+	top: 0;
+}
+
+.language {
+	text-align: right;
+}
+
+.language img {
+	height: 1em;
+	width: 1.5em;
+	padding: 0.5em 0.25em;
