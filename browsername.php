@@ -9,7 +9,7 @@
 require_once 'vendor/autoload.php';
 
 use BrowscapPHP\Browscap;
-$cacheDir = 'vendor/browscap/browscap-php/resources';
+$cacheDir = 'resources/browscap-php';
 $fileCache = new \Doctrine\Common\Cache\FilesystemCache($cacheDir);
 $cache = new \Roave\DoctrineSimpleCache\SimpleCacheAdapter($fileCache);
 
