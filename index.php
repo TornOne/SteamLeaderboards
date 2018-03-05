@@ -1,6 +1,7 @@
-<?php
-include 'pieces/header.php';
-?>
+<?php include 'pieces/head.php';?>
+<link href="index.css" rel="stylesheet" type="text/css"/>
+</head>
+<?php include 'pieces/header.php';?>
 
 <div class="main">
 	<div class="ranking">
@@ -39,6 +40,4 @@ include 'pieces/header.php';
 	</div>
 </div>
 
-<?php
-include 'pieces/footer.php';
-?>
+<?php include 'pieces/footer.php';?>
