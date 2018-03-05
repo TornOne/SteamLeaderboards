@@ -1,0 +1,16 @@
+CREATE TABLE bigbrother (
+    id SERIAL,
+    browser VARCHAR(50),
+    requestTime TIME,
+    platform VARCHAR(50),
+    PRIMARY KEY(id)
+);
+
+CREATE VIEW bb_browsers AS
+SELECT browser, count(*) FROM bigbrother GROUP BY browser;
+
+CREATE VIEW bb_platforms AS
+SELECT platform, count(*) FROM bigbrother GROUP BY platform;
+
+CREATE VIEW bb_times AS
+SELECT EXTRACT(HOUR FROM requestTime), count(*) FROM bigbrother GROUP BY EXTRACT(HOUR FROM requestTime);
