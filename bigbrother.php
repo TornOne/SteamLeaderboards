@@ -34,13 +34,13 @@ $result_times = pg_execute($conn, "get_times", array());
 while ($row = pg_fetch_row($result_browsers)) {
     echo nl2br("$row[0]:  $row[1]\n");
 }
-nl2br("\n");
+echo nl2br("\n");
 while ($row = pg_fetch_row($result_platforms)) {
     echo nl2br("$row[0]:  $row[1]\n");
 }
-nl2br("\n");
+echo nl2br("\n");
 while ($row = pg_fetch_row($result_times)) {
-    echo nl2br("$row[0]:  $row[1]");
+    echo nl2br("$row[0]:  $row[1]\n");
 }
 
 pg_free_result($result_browsers);
