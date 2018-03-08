@@ -25,9 +25,9 @@ pg_execute($conn, "insert_bb", array($browser, $requestTime, $platform));
 pg_prepare($conn, "get_data", 'SELECT * FROM $1;');
 $result_browsers = pg_execute($conn, "get_data", array("bb_browsers"));
 
-var_dump($result_browsers);
+var_dump(pg_fetch_all($result_browsers));
 echo nl2br("\n\n");
-print_r($result_browsers);
+print_r(pg_fetch_all($result_browsers));
 
 pg_free_result($result_browsers);
 pg_close($conn);
