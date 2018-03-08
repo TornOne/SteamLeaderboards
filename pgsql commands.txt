@@ -7,10 +7,10 @@ CREATE TABLE bigbrother (
 );
 
 CREATE VIEW bb_browsers AS
-SELECT browser, count(*) FROM bigbrother GROUP BY browser;
+SELECT browser, count(*) FROM bigbrother GROUP BY browser ORDER BY count(*) DESC;
 
 CREATE VIEW bb_platforms AS
-SELECT platform, count(*) FROM bigbrother GROUP BY platform;
+SELECT platform, count(*) FROM bigbrother GROUP BY platform ORDER BY count(*) DESC;
 
 CREATE VIEW bb_times AS
-SELECT EXTRACT(HOUR FROM requestTime), count(*) FROM bigbrother GROUP BY EXTRACT(HOUR FROM requestTime);
+SELECT EXTRACT(HOUR FROM requestTime), count(*) FROM bigbrother GROUP BY EXTRACT(HOUR FROM requestTime) ORDER BY EXTRACT(HOUR FROM requestTime);
