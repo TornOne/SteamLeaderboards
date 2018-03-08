@@ -23,7 +23,7 @@ pg_prepare($conn, "insert_bb", 'INSERT INTO bigbrother (browser, requestTime, pl
 pg_execute($conn, "insert_bb", array($browser, $requestTime, $platform));
 
 pg_prepare($conn, "get_data", 'SELECT * FROM $1;');
-$result_browsers = pg_execute($conn, "get_data", array('bb_browsers'));
+$result_browsers = pg_execute($conn, "get_data", array("bb_browsers"));
 
 var_dump($result_browsers);
 echo nl2br("\n\n");
