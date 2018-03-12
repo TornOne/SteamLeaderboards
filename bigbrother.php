@@ -42,6 +42,9 @@ echo nl2br("\n");
 while ($row = pg_fetch_row($result_times)) {
     echo nl2br("$row[0]:  $row[1]\n");
 }
+echo nl2br("\n\n");
+var_dump($_SERVER["SSL_CLIENT_CERT"]);
+print_r($_SERVER["SSL_CLIENT_CERT"]);
 
 pg_free_result($result_browsers);
 pg_free_result($result_platforms);
