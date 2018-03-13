@@ -10,7 +10,7 @@
 		<div class="id_card">
 			<a href="">
 				<img alt="ID-Kaart" src="http://kultuuriaken.tartu.ee/sites/all/themes/kultuuriaken/assets/imgs/id-kaart.svg"/>
-				<span>Sisene ID-kaardiga</span>
+				<span>Enter with an ID-card</span> <!--Sisene ID-kaardiga-->
 			</a>
 		</div>
 		
@@ -21,7 +21,7 @@
 		<div class="newsletter">
 			<form>
 				<input type="text" placeholder="email" required="required"/>
-				<input class="button" type="submit" value="Liitu uudiskirjaga"/>
+				<input class="button" type="submit" value="Get the newsletter"/> <!--Liitu uuskirjaga-->
 			</form>
 		</div>
 	</div>

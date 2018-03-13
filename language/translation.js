@@ -3,7 +3,7 @@ var arrLang = {
         'ranking' : 'Ranking',
         'about' : 'About',
         'stats' : 'Stats',
-        'extra' : 'Extra'
+        'extra' : 'Extras'
     },
     'et' : {
         'ranking' : 'Edetabel',
