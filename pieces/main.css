@@ -52,8 +52,18 @@ a {
 	text-align: right;
 }
 
-.language img {
-	height: 1em;
-	width: 1.5em;
-	padding: 0.5em 0.25em;
+.language button {
+	padding: 0.67em 1em;
+	margin: 0.5em 0.25em;
+	border: 0;
+	border-radius: 0.5em;
+	background-size: 100% 100%;
+}
+
+#et {
+	background-image: url("http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/Estonia-icon.png");
+}
+
+#en {
+	background-image: url("http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/United-Kingdom-icon.png");
 }

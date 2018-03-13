@@ -2,8 +2,8 @@
 <div class="header">
 	<div class="right_corner">
 		<div class="language">
-			<button class="translate" id="et"><img src="http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/Estonia-icon.png"/></button>
-			<button class="translate" id="en"><img src="http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/United-Kingdom-icon.png"/></button>
+			<button class="translate" id="et"/>
+			<button class="translate" id="en"/>
 		</div>
 
 		<div id="login">
