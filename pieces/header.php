@@ -2,8 +2,8 @@
 <div class="header">
 	<div class="right_corner">
 		<div class="language">
-			<a href=""><img src="http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/Estonia-icon.png"/></a>
-			<a href=""><img src="http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/United-Kingdom-icon.png"/></a>
+			<button class="translate" id="et"><img src="http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/Estonia-icon.png"/></button>
+			<button class="translate" id="en"><img src="http://icons.iconarchive.com/icons/hopstarter/flag-borderless/256/United-Kingdom-icon.png"/></button>
 		</div>
 
 		<div id="login">
@@ -24,9 +24,9 @@
 	</div>
 
     <div class="navigation_bar">
-		<a href="index.php">Ranking</a>
-		<a href="stats.php">Stats</a>
-        <a href="about.php">About</a>
-        <a href="extras.php">Extras</a>
+		<a href="index.php" class="trl" key="ranking">Ranking</a>
+		<a href="stats.php" class="trl" key="stats">Stats</a>
+        <a href="about.php" class="trl" key="about">About</a>
+        <a href="extras.php" class="trl" key="extra">Extras</a>
     </div>
 </div>
