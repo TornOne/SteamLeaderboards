@@ -1,7 +1,8 @@
-import urllib, datetime, json, math, os
+import urllib, json, math, os
 
 #TODO: Multithreading?
 #TODO: First go through all the games, then gather the little details
+#TODO: Tags
 
 def getGames(pagenr):
     page = urllib.urlopen("http://store.steampowered.com/search/?sort_by=Released_DESC&category1=998&page=" + str(pagenr))
@@ -46,7 +47,10 @@ def listGames(pagenr):
         appids.append(url[4])
 
         #Find price
-        price = game[game.find('<div class="col search_price  responsive_secondrow">') + 52:]
+        score = game.find('<div class="col search_price  responsive_secondrow">') + 52
+        if score == 51: #Discounted
+            score = game.find("</strike></span><br>") + 20
+        price = game[score:]
         price = price[:price.find("</div>")].strip()
         if "Free" in price:
             price = 0
@@ -109,14 +113,6 @@ def fixDates(dates):
                         break
             else:
                 dates[-i] = dates[-i + 1]
-
-#Unused
-def dateToInt(date):
-    return date.year * 10000 + date.month * 100 + date.day
-
-#Unused
-def intToDate(date):
-    return datetime.date(date / 10000, (date % 10000) / 100, date % 100)
 
 fail = open("games.txt", "w")
 #Find the total number of pages
