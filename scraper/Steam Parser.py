@@ -125,7 +125,7 @@ contents = page.read()
 contents = contents[contents.find('<div class="search_pagination_right">')+37:]
 contents = contents[:contents.find('</div>')].split()[-14]
 
-for pagenr in xrange(1, 10):#int(contents[contents.rfind("=") + 1:-1]) + 1):
+for pagenr in xrange(1, int(contents[contents.rfind("=") + 1:-1]) + 1):
     print pagenr,
     names, pos_scores, tot_scores, scores, appids, platforms, dates, prices = listGames(pagenr)
     fixDates(dates)
