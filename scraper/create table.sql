@@ -1,0 +1,1 @@
+CREATE TABLE games (appid integer PRIMARY KEY, name varchar, pos_votes integer, tot_votes integer, score real, platforms smallint, release date, price real);
