@@ -73,11 +73,14 @@ def listGames(pagenr):
         platforms.append(platform)
 
         #Find scores
-        page = urllib.urlopen("http://store.steampowered.com/appreviews/" + appids[i] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if price == 0 else "steam"))
+        page = urllib.urlopen("http://store.steampowered.com/appreviews/" + appids[i] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if price <= 0 else "steam"))
         contents = json.loads(page.read())
         pos_scores.append(contents["query_summary"]["total_positive"])
         tot_scores.append(contents["query_summary"]["total_reviews"])
-        rating = float(pos_scores[i]) / tot_scores[i]
+        if tot_scores[i] != 0:
+            rating = float(pos_scores[i]) / tot_scores[i]
+        else:
+            rating = 0.5
         scores.append(rating - (rating - 0.5) * math.pow(2, -math.log10(tot_scores[i] + 1)))
         
         #Find game name
