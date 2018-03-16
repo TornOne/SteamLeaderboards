@@ -133,4 +133,7 @@ for pagenr in xrange(1, int(contents[contents.rfind("=") + 1:-1]) + 1):
         
 fail.close()
 
+os.startfile("converter")
+import time
+time.sleep(10)
 os.startfile("DBsaver.py")
