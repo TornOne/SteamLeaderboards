@@ -13,11 +13,33 @@ var arrLang = {
     }
 };
 
-$(function() {
-    $('.translate').click(function (){
-        var trl = $(this).attr('id');
+function onPageLoad(){
+    var trl;
+    if(sessionStorage.getItem("lang")) {
+        trl = sessionStorage.getItem("lang");
+    }
+    else{
+        trl = "en";
+    }
 
-        $('.trl').each(function(index,element){
+    $('.trl').each(function(){
+        $(this).text(arrLang[trl][$(this).attr('key')]);
+    });
+
+}
+
+// When the page has been loaded
+$(document).ready(function(){
+    onPageLoad();
+});
+
+$(function translate() {
+    $('.translate').click(function (){
+
+        var trl = $(this).attr('id');
+        sessionStorage.setItem("lang", trl);
+
+        $('.trl').each(function(){
             $(this).text(arrLang[trl][$(this).attr('key')]);
         });
     });
