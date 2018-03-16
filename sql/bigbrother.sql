@@ -16,5 +16,5 @@ CREATE VIEW bb_times AS
 SELECT EXTRACT(HOUR FROM requestTime), count(*) FROM bigbrother GROUP BY EXTRACT(HOUR FROM requestTime) ORDER BY EXTRACT(HOUR FROM requestTime);
 
 CREATE OR REPLACE FUNCTION insert_bb(VARCHAR(50), TIME, VARCHAR(50)) RETURNS void AS $$
-	INSERT INTO bigbrother (browser, requestTime, platform) VALUES ($1, $2, $3)
+	INSERT INTO bigbrother (browser, requestTime, platform) VALUES ($1, $2, $3);
 $$ LANGUAGE SQL;
