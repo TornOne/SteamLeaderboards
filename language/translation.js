@@ -13,12 +13,7 @@ var arrLang = {
     }
 };
 
-// When the page has been loaded
-$(function(){
-    onPageLoad();
-});
-
-$(function onPageLoad(){
+function onPageLoad(){
     var trl;
     if(sessionStorage.getItem("lang")) {
         trl = sessionStorage.getItem("lang");
@@ -31,8 +26,12 @@ $(function onPageLoad(){
         $(this).text(arrLang[trl][$(this).attr('key')]);
     });
 
-});
+}
 
+// When the page has been loaded
+$(document).ready(function(){
+    onPageLoad();
+});
 
 $(function translate() {
     $('.translate').click(function (){
