@@ -9,7 +9,11 @@
 	font-size: 1.5em;
 }
 
-.stats ol ul {
+.stats ol {
+	font-size: 0.67em;
+}
+
+.stats ul {
 	font-size: 0.67em;
 }
 
