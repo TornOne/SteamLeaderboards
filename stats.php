@@ -13,7 +13,7 @@ $result_times = pg_query($conn, 'SELECT * FROM bb_times;');
 
 <div class="stats">
 	<div>
-		Visitors per country:
+		Visitors per OS:
 		<ol>
 			<?php
 			while ($row = pg_fetch_row($result_platforms)) {
@@ -39,7 +39,7 @@ $result_times = pg_query($conn, 'SELECT * FROM bb_times;');
 		<ol>
 			<?php
 			while ($row = pg_fetch_row($result_times)) {
-				echo "\t\t\t<li><span class=\"stats_item\"><span>" . $row[0] . " - " . $row[0] + 1 . "</span><span>" . $row[1] . "</span></span></li>\n";
+				echo "\t\t\t<li><span class=\"stats_item\"><span>" . $row[0] . " - " . ($row[0] + 1) . "</span><span>" . $row[1] . "</span></span></li>\n";
 			}
 			?>
 		</ol>
