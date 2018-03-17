@@ -15,33 +15,27 @@ $result_times = pg_query($conn, 'SELECT * FROM bb_times;');
 	<div>
 		Visitors per OS:
 		<ol>
-			<?php
-			while ($row = pg_fetch_row($result_platforms)) {
-				echo "\t\t\t<li><span class=\"stats_item\"><span>", $row[0], "</span><span>", $row[1], "</span></span></li>\n";
-			}
-			?>
+			<?php while ($row = pg_fetch_row($result_platforms)) { ?>
+				<li><span class="stats_item"><span><?=$row[0]?></span><span><?=$row[1]?></span></span></li>
+			<?php } ?>
 		</ol>
 	</div>
 	
 	<div>
 		Visitors per broswer:
 		<ol>
-			<?php
-			while ($row = pg_fetch_row($result_browsers)) {
-				echo "\t\t\t<li><span class=\"stats_item\"><span>", $row[0], "</span><span>", $row[1], "</span></span></li>\n";
-			}
-			?>
+			<?php while ($row = pg_fetch_row($result_browsers)) { ?>
+				<li><span class="stats_item"><span><?=$row[0]?></span><span><?=$row[1]?></span></span></li>
+			<?php } ?>
 		</ol>
 	</div>
 	
 	<div>
 		Visitors per hour:
 		<ul>
-			<?php
-			while ($row = pg_fetch_row($result_times)) {
-				echo "\t\t\t<li><span class=\"stats_item\"><span>", $row[0], " - ", $row[0] + 1, "</span><span>", $row[1], "</span></span></li>\n";
-			}
-			?>
+			<?php while ($row = pg_fetch_row($result_times)) { ?>
+				<li><span class="stats_item"><span><?=$row[0]?> - <?=$row[0] + 1?></span><span><?=$row[1]?></span></span></li>
+			<?php } ?>
 		</ul>
 	</div>
 </div>
