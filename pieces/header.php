@@ -18,7 +18,7 @@
 			</form>
 		</div>
 		
-		<div id="log out" hidden="hidden">
+		<div id="logout" hidden="hidden">
 		</div>
 	</div>
 	
