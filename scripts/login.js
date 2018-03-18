@@ -19,16 +19,16 @@ window.onload = function() {
 				games[i] = games[i]["appid"];
 			}
 			localStorage.setItem("steamGames", games);
-			location.replace(location.hostname + "/" + params["return_to"]);
+			document.location.replace(location.hostname + "/" + params["return_to"]);
 		}
 		
 		req.open("GET", "http://steamleaderboards.herokuapp.com/login/fetchUserData.php?id=" + params["openid.identity"].substr(params["openid.identity"].lastIndexOf("%2F") + 3));
 		req.send();
 	} else {
 		if ("return_to" in params) {
-			location.replace(location.hostname + "/" + params["return_to"]);
+			document.location.replace(location.hostname + params["return_to"]);
 		} else {
-			location.replace(location.hostname);
+			document.location.replace(location.hostname);
 		}
 	}
 }
