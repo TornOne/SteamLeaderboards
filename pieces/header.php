@@ -24,9 +24,9 @@
 	</div>
 
     <div class="navigation_bar">
-		<a href="index.php" class="trl" key="ranking">Ranking</a>
-		<a href="stats.php" class="trl" key="stats">Stats</a>
-        <a href="about.php" class="trl" key="about">About</a>
-        <a href="extras.php" class="trl" key="extra">Extras</a>
+		<a href="index.php" class="trl" data-info="ranking">Ranking</a>
+		<a href="stats.php" class="trl" data-info="stats">Stats</a>
+        <a href="about.php" class="trl" data-info="about">About</a>
+        <a href="extras.php" class="trl" data-info="extra">Extras</a>
     </div>
 </div>
