@@ -1,7 +1,5 @@
-var games;;
-
 addEventListener("load", function() {
-	games = localStorage.getItem("steamGames").split(",");
+	var games = localStorage.getItem("steamGames").split(",");
 	if (games) {
 		var matches = document.querySelectorAll(".game_listing");
 		for (i = 0; i < matches.length; i++) {
@@ -10,7 +8,6 @@ addEventListener("load", function() {
 			appid = appid.substr(appid.lastIndexOf("/") + 1);
 			
 			if (games.includes(appid)) {
-				console.log(appid);
 				matches[i].classList.add("owned");
 			}
 		}
