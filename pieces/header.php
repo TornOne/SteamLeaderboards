@@ -1,13 +1,3 @@
-<?php
-require "steamauth/steamauth.php";
-require "steamauth/userInfo.php";
-
-if (isset($_SESSION["steamid"])) {
-	$id = $_SESSION["steamid"];
-} else {
-	//Not logged in
-}
-?>
 <body>
 <div class="header">
 	<div class="right_corner">
@@ -24,7 +14,7 @@ if (isset($_SESSION["steamid"])) {
 				<input name="openid.claimed_id" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
 				<input name="openid.identity" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
 				<input name="openid.return_to" value="http://steamleaderboards.herokuapp.com/login.php" type="hidden"/>
-				<input name="openid.realm" value="http://steamleaderboards.herokuapp.com/" type="hidden"
+				<input name="openid.realm" value="http://steamleaderboards.herokuapp.com/" type="hidden">
 			</form>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 <?php
-if isset($_GET["openid.identity"]) {
-	$id = strrchr($_GET["openid.identity"], "/")
+if (isset($_GET["openid.identity"])) {
+	$id = strrchr($_GET["openid.identity"], "/");
 }
 ?>
 
