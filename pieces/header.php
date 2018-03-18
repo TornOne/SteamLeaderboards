@@ -15,19 +15,16 @@ if (isset($_SESSION["steamid"])) {
 			<button class="translate" id="et"/>
 			<button class="translate" id="en"/>
 		</div>
-
-		<?php if (isset($_SESSION["steamid"])):?>
-		<?=$steamprofile["personaname"]?>
-		<?php endif; ?>
-		<?=loginbutton()?>
+		
 		<div id="login">
 			<form action="https://steamcommunity.com/openid/login" method="post">
 				<button id="loginbutton">Sign in with Steam</button><!--https://steamcdn-a.akamaihd.net/steamcommunity/public/images/steamworks_docs/english/sits_small.png-->
-				<input name="openid.identity" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
-				<input name="openid.claimed_id" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
 				<input name="openid.ns" value="http://specs.openid.net/auth/2.0" type="hidden"/>
 				<input name="openid.mode" value="checkid_setup" type="hidden"/>
-				<input name="openid.return_to" value="http://steamleaderboards.herokuapp.com/" type="hidden"/> <!--Our page link?-->
+				<input name="openid.claimed_id" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
+				<input name="openid.identity" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
+				<input name="openid.return_to" value="http://steamleaderboards.herokuapp.com/login.php" type="hidden"/>
+				<input name="openid.realm" value="http://steamleaderboards.herokuapp.com/" type="hidden"
 			</form>
 		</div>
 	</div>
