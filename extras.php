@@ -20,8 +20,8 @@
 		
 		<div class="newsletter">
 			<form>
-				<label for="email">Email:</label>
-				<input type="text" name="email" required="required"/>
+				<label for="newsletter_email">Email:</label>
+				<input type="text" id="newsletter_email" required="required"/>
 				<input class="button" type="submit" value="Get the newsletter"/> <!--Liitu uuskirjaga-->
 			</form>
 		</div>

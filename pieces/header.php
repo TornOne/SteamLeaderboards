@@ -2,8 +2,8 @@
 <div class="header">
 	<div class="right_corner">
 		<div class="language">
-			<button class="translate" id="et"></button>
-			<button class="translate" id="en"></button>
+			<button class="translate" name="Estonian" id="et"></button>
+			<button class="translate" name="English" id="en"></button>
 		</div>
 		
 		<div id="login" hidden="hidden">
