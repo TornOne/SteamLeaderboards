@@ -16,6 +16,21 @@
 	vertical-align: top;
 }
 
+.owned {
+	position: relative;
+}
+
+.owned::before {
+	content: "";
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: 5px;
+	left: 100px;
+	background: rgba(0, 192, 0, 0.8);
+	border-radius: 5px;
+}
+
 .game_ranking {
 	flex-grow: 0;
 	margin: auto 0.3vw;

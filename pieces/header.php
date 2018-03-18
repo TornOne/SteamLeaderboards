@@ -6,7 +6,7 @@
 			<button class="translate" id="en"></button>
 		</div>
 		
-		<div id="login">
+		<div id="login" hidden="hidden">
 			<form action="https://steamcommunity.com/openid/login" method="post">
 				<button id="loginbutton">Sign in with Steam</button><!--https://steamcdn-a.akamaihd.net/steamcommunity/public/images/steamworks_docs/english/sits_small.png-->
 				<input name="openid.ns" value="http://specs.openid.net/auth/2.0" type="hidden"/>
@@ -16,6 +16,9 @@
 				<input name="openid.return_to" value="http://steamleaderboards.herokuapp.com/login/login.php?return_to=<?=urlencode($_SERVER["REQUEST_URI"])?>" type="hidden"/>
 				<input name="openid.realm" value="http://steamleaderboards.herokuapp.com/" type="hidden">
 			</form>
+		</div>
+		
+		<div id="log out" hidden="hidden">
 		</div>
 	</div>
 	
