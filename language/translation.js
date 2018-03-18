@@ -23,7 +23,7 @@ function onPageLoad(){
     }
 
     $('.trl').each(function(){
-        $(this).text(arrLang[trl][$(this).attr('key')]);
+        $(this).text(arrLang[trl][$(this).attr('data-info')]);
     });
 
 }
@@ -40,7 +40,7 @@ $(function translate() {
         sessionStorage.setItem("lang", trl);
 
         $('.trl').each(function(){
-            $(this).text(arrLang[trl][$(this).attr('key')]);
+            $(this).text(arrLang[trl][$(this).attr('data-info')]);
         });
     });
 });
