@@ -1,6 +1,6 @@
 <?php include 'pieces/head.php';?>
 <link href="extras.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0nOA_TjOTHEdszqjnwS1DcyKFOOxX9Cg&callback=initMap"></script>
+<script defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0nOA_TjOTHEdszqjnwS1DcyKFOOxX9Cg&callback=initMap"></script>
 <script src="/scripts/googlemaps.js"></script>
 </head>
 <?php include 'pieces/header.php';?>

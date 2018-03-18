@@ -2,8 +2,8 @@
 <div class="header">
 	<div class="right_corner">
 		<div class="language">
-			<button class="translate" id="et"/>
-			<button class="translate" id="en"/>
+			<button class="translate" id="et"></button>
+			<button class="translate" id="en"></button>
 		</div>
 		
 		<div id="login">
@@ -13,7 +13,7 @@
 				<input name="openid.mode" value="checkid_setup" type="hidden"/>
 				<input name="openid.claimed_id" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
 				<input name="openid.identity" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
-				<input name="openid.return_to" value="http://steamleaderboards.herokuapp.com/login.php" type="hidden"/>
+				<input name="openid.return_to" value="http://steamleaderboards.herokuapp.com/login/login.php?return_to=<?=urlencode($_SERVER["REQUEST_URI"])?>" type="hidden"/>
 				<input name="openid.realm" value="http://steamleaderboards.herokuapp.com/" type="hidden">
 			</form>
 		</div>

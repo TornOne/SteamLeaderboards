@@ -8,4 +8,4 @@
     <script>
         window.jQuery || document.write('<script src="language/jquery.min.js">\x3C/script>')
     </script> <!--In case CDN server is down-->
-    <script type="text/javascript" src="language/translation.js"></script> <!--Dictionary file-->
+    <script src="language/translation.js"></script> <!--Dictionary file-->
