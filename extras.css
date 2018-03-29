@@ -65,8 +65,3 @@
 .button:hover {
 	background-color: rgba(60, 63, 66, 0.5);
 }
-
-#google_maps {
-	height: 360px;
-	width: 640px;
-}
