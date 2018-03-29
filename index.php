@@ -61,5 +61,3 @@
 </div>
 
 <?php include 'pieces/footer.php';?>
-
-<?php include 'bigbrother.php';?>
