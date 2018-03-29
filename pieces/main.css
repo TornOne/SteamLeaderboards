@@ -1,11 +1,7 @@
 body {
 	font-family: sans-serif;
 	color: #c6d4df;
-	background-image: url("/images/background.jpg");
-	background-repeat: no-repeat;
-	background-position: center top;
-	background-attachment: fixed;
-	background-color: #1B2838;
+	background: #1B2838 url("/images/background.jpg") no-repeat fixed center top;
 	background-size: cover;
 	margin: 0
 }

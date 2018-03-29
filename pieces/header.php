@@ -18,12 +18,12 @@
 	</div>
 	
 	<div class="title">
-		<a href="index.php">Steam Leaderboards</a>
+		<a href="/index.php">Steam Leaderboards</a>
 	</div>
 
     <div class="navigation_bar">
-		<a href="index.php">Ranking</a>
-        <a href="about.php">About</a>
-        <a href="extras.php">Extras</a>
+		<a href="/index.php">Ranking</a>
+        <a href="/about.php">About</a>
+        <a href="/extras.php">Extras</a>
     </div>
 </div>

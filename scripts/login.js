@@ -2,8 +2,8 @@ window.onload = function() {
 	var parts = location.search.substr(1).split("&");
 	var params = {};
 	
-	for (i = 0; i < parts.length; i++) {
-		p = parts[i].split("=");
+	for (var i = 0; i < parts.length; i++) {
+		var p = parts[i].split("=");
 		params[p[0]] = p[1];
 	}
 	
@@ -11,7 +11,7 @@ window.onload = function() {
 		var req = new XMLHttpRequest();
 		
 		req.onload = function() {
-			userdata = JSON.parse(this.responseText);
+			var userdata = JSON.parse(this.responseText);
 			localStorage.setItem("steamName", userdata["user"]["response"]["players"]["0"]["personaname"]);
 			localStorage.setItem("steamAvatar", userdata["user"]["response"]["players"]["0"]["avatar"]);
 			var games = userdata["games"]["response"]["games"];
@@ -20,7 +20,7 @@ window.onload = function() {
 			}
 			localStorage.setItem("steamGames", games);
 			location.replace(decodeURIComponent(params["return_to"]));
-		}
+		};
 		
 		req.open("GET", "http://steamleaderboards.herokuapp.com/login/fetchUserData.php?id=" + params["openid.identity"].substr(params["openid.identity"].lastIndexOf("%2F") + 3));
 		req.send();
@@ -31,4 +31,4 @@ window.onload = function() {
 			location.replace("/");
 		}
 	}
-}
+};
