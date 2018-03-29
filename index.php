@@ -12,7 +12,6 @@
 		Maybe? add a color to the weighted review%
 		Add a flex div and a tag selector to the right
 		Add tags back
-		Fix the decimal point being removed on xx.0% games
 		-->
 		<?php
 		$conn = pg_connect(getenv("DATABASE_URL"));
@@ -50,10 +49,10 @@
 			
 			<div class="game_score_reviews">
 				<p class="game_score">
-					<span><?=round($row[4] * 100, 1)?>%</span>
-					(<?=round($row[2] * 100, 1)?>%)
+					<span><?=number_format($row[4] * 100, 1)?>%</span>
+					(<?=number_format($row[2] * 100, 1)?>%)
 				</p>
-				<span><?=$row[3]?> reviews</span>
+				<span><?=number_format($row[3], 0, '.', ' ')?> reviews</span>
 			</div>
 		</a>
 		<?php } ?>
