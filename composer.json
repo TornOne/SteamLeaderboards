@@ -1,7 +1,4 @@
 {
   "require": {
-    "doctrine/doctrine-bundle": "^1.8",
-    "doctrine/orm": "*",
-    "browscap/browscap-php": "^4.1"
   }
 }
