@@ -15,6 +15,10 @@
 		<div class="donate_button">
 			<a href="">Donate!</a>
 		</div>
+
+        <div class="popup" onclick="activatePopup()"><img src="https://image.flaticon.com/icons/svg/54/54591.svg" alt="question mark symbol">
+            <span class="popuptext" id="myPopup">Interactive help information!</span>
+        </div>
 		
 		<div class="newsletter">
 			<form>
