@@ -34,5 +34,11 @@ def print_user_views():
 def get_user_functions():
     return query("SELECT * FROM pg_proc WHERE proowner != 10;")
 
+def print_user_functions():
+    for row in get_user_functions():
+        print row[0], "\t", row[1], "\t", row[2]
+        print row[-4]
+        print
+
 conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode="require")
 curs = conn.cursor()
