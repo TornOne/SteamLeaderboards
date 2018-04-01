@@ -1,3 +1,12 @@
+<?php
+$conn = pg_connect(getenv("DATABASE_URL"));
+$last_refresh = strtotime(pg_fetch_result(pg_query($conn, 'SELECT * FROM last_refresh;'), 0, 0));
+if (time() - $last_refresh > 86400) { //If the last refresh was more than a day ago
+	pg_query($conn, 'SELECT reset_refresh_time();');
+	exec("scripts/Start.py")
+}
+?>
+
 <?php include 'pieces/head.php';?>
 <script src="/scripts/colorGames.js"></script>
 <link href="index.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +23,6 @@
 		Add tags back
 		-->
 		<?php
-		$conn = pg_connect(getenv("DATABASE_URL"));
 		$games = pg_query($conn, 'SELECT * FROM top_games LIMIT 25 OFFSET 0;');
 		while ($row = pg_fetch_row($games)) {
 		//appid, name, rating, votes, score, platforms, release, price, row_number
