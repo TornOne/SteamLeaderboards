@@ -19,7 +19,7 @@
 		while ($row = pg_fetch_row($games)) {
 		//appid, name, rating, votes, score, platforms, release, price, row_number
 		?>
-		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?> itemprop="gameLocation"/">
+            <a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/" itemprop="gameLocation">
 			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_sm_120.jpg" itemprop="thumbnailUrl"/>
 			<span class="game_ranking" itemprop="position"><?=$row[8]?>.</span>
 			
