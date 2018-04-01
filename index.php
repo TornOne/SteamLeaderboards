@@ -4,8 +4,8 @@
 </head>
 <?php include 'pieces/header.php';?>
 
-<div class="main">
-	<div class="ranking">
+<div class="main" itemscope itemtype="http://schema.org/WebPage">
+	<div class="ranking" itemscope itemtype="http://schema.org/VideoGame">
 		<!--TODO:
 		Make elements scale down as browser gets narrower to always fit them
 		Name and tags should be properly clipped before the other columns start to be affected
@@ -19,12 +19,12 @@
 		while ($row = pg_fetch_row($games)) {
 		//appid, name, rating, votes, score, platforms, release, price, row_number
 		?>
-		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/">
-			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_sm_120.jpg"/>
-			<span class="game_ranking"><?=$row[8]?>.</span>
+		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?> itemprop="gameLocation"/">
+			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_sm_120.jpg" itemprop="thumbnailUrl"/>
+			<span class="game_ranking" itemprop="position"><?=$row[8]?>.</span>
 			
 			<div class="game_title_tags">
-				<span class="game_title"><?=$row[1]?></span>
+				<span class="game_title" itemprop="name"><?=$row[1]?></span>
 				<p class="game_tags">
 					<!--
 					<span>Puzzle</span>
@@ -35,8 +35,8 @@
 			</div>
 			
 			<div class="game_release_platforms">
-				<span class="game_release"><?=date("j M, Y", strtotime($row[6]))?></span>
-				<p class="game_platforms">
+				<span class="game_release" itemprop="dateCreated"><?=date("j M, Y", strtotime($row[6]))?></span>
+				<p class="game_platforms" itemprop="operatingSystem">
 					<?php if ($row[5] & 1): ?>
 					<span class="win_icon"></span>
 					<?php endif; if ($row[5] & 2): ?>
@@ -48,11 +48,11 @@
 			</div>
 			
 			<div class="game_score_reviews">
-				<p class="game_score">
+				<p class="game_score" itemprop="position">
 					<span><?=number_format($row[4] * 100, 1)?>%</span>
 					(<?=number_format($row[2] * 100, 1)?>%)
 				</p>
-				<span><?=number_format($row[3], 0, '.', ' ')?> reviews</span>
+				<span itemprop="commentCount"><?=number_format($row[3], 0, '.', ' ')?> reviews</span>
 			</div>
 		</a>
 		<?php } ?>
