@@ -27,7 +27,7 @@ def listGames(pagenr):
             score = 0
         else:
             score = score[score.find("&lt;br&gt;") + 10:score.find(" user reviews")].split()
-            rating = float(score[0][:-1])
+            rating = float(score[0][:-1]) / 100
             votes = int(score[-1].replace(",", ""))
             score = rating - (rating - 0.5) * math.pow(2, -math.log10(votes + 1))
         
