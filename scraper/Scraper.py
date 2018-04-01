@@ -21,14 +21,14 @@ def listGames(pagenr):
         #Find (initial) scores
         score = game[game.find('<div class="col search_reviewscore responsive_secondrow">') + 57:]
         score = score[:score.find("</div>")].strip()
-        if score = "":
+        if score == "":
             rating = 0
             votes = 0
             score = 0
         else:
             score = score[score.find("&lt;br&gt;") + 10:score.find(" user reviews")].split()
             rating = float(score[0][:-1])
-            votes = int(score[-1])
+            votes = int(score[-1].replace(",", ""))
             score = rating - (rating - 0.5) * math.pow(2, -math.log10(votes + 1))
         
         #Find date
@@ -117,11 +117,11 @@ def firstPass():
 
 def getPreciseScores(games):
     for game in games:
-        page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if prices[i] <= 0 else "steam"))
+        page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[7] <= 0 else "steam"))
         contents = json.loads(page.read())
         game[3] = contents["query_summary"]["total_reviews"]
         if game[3] != 0:
-            game[2] = float(contents["query_summary"]["total_positive"]) / votes[i]
+            game[2] = float(contents["query_summary"]["total_positive"]) / game[3]
         else:
             game[2] = 0.5
         game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
