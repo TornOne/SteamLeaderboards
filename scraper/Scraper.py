@@ -128,7 +128,9 @@ def getPreciseScores(games):
 
 try:
     games = firstPass()
-    getPreciseScores(games)
+    getPreciseScores(games[-100:]) #Temporary (inside)
+    games.sort(key = lambda game: game[4]) #Temporary
+    games.reverse() #Temporary
 
     #Save results to file
     fail = open("games.txt", "w")
