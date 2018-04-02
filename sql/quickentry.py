@@ -40,5 +40,7 @@ def print_user_functions():
         print row[-4]
         print
 
+#EXPLAIN ANALYZE ...
+
 conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode="require")
 curs = conn.cursor()
