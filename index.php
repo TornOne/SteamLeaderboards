@@ -1,9 +1,12 @@
 <?php
 $conn = pg_connect(getenv("DATABASE_URL"));
 $last_refresh = strtotime(pg_fetch_result(pg_query($conn, 'SELECT * FROM last_refresh;'), 0, 0));
+if (file_exists("scraper/Start.py")) {
+	echo fileperms("scraper/Start.py");
+}
 if (time() - $last_refresh > 86400) { //If the last refresh was more than a day ago
 	pg_query($conn, 'SELECT reset_refresh_time();');
-	exec("scripts/Start.py");
+	echo exec("scraper/Start.py");
 }
 ?>
 
