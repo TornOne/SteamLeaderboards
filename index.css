@@ -20,6 +20,7 @@
 	position: relative;
 }
 
+/*Replace with Steam's owned and wishlist icons*/
 .owned::before {
 	content: "";
 	position: absolute;

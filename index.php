@@ -2,8 +2,9 @@
 $conn = pg_connect(getenv("DATABASE_URL"));
 $last_refresh = strtotime(pg_fetch_result(pg_query($conn, 'SELECT * FROM last_refresh;'), 0, 0));
 if (time() - $last_refresh > 86400) { //If the last refresh was more than a day ago
-	pg_query($conn, 'SELECT reset_refresh_time();');
-	exec("scripts/Start.py")
+	//pg_query($conn, 'SELECT reset_refresh_time();');
+	//exec("scripts/Start.py");
+    echo "1";
 }
 ?>
 
@@ -23,13 +24,15 @@ if (time() - $last_refresh > 86400) { //If the last refresh was more than a day 
 		Add tags back
 		-->
 		<?php
-		$games = pg_query($conn, 'SELECT * FROM top_games LIMIT 25 OFFSET 0;');
+        $offset = 0;
+		$games = pg_query_params($conn, 'SELECT * FROM top_games LIMIT 25 OFFSET $1;', array($offset));
 		while ($row = pg_fetch_row($games)) {
-		//appid, name, rating, votes, score, platforms, release, price, row_number
+		    $offset++;
+		    //appid, name, rating, votes, score, platforms, release, price [, tags]
 		?>
             <a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/" itemprop="gameLocation">
 			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_sm_120.jpg" itemprop="thumbnailUrl"/>
-			<span class="game_ranking" itemprop="position"><?=$row[8]?>.</span>
+			<span class="game_ranking" itemprop="position"><?=$offset?>.</span>
 			
 			<div class="game_title_tags">
 				<span class="game_title" itemprop="name"><?=$row[1]?></span>
