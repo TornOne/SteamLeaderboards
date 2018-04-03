@@ -5,6 +5,7 @@ if (time() - $last_refresh > 86400) { //If the last refresh was more than a day 
 	//pg_query($conn, 'SELECT reset_refresh_time();');
 	echo exec("python scraper/Scraper.py");// . " > /dev/null &");
     echo exec("find /app/scraper/ -name \"games.txt\"");
+	echo exec("find /app/scraper/ -name \"Scraper.py\"");
 }
 ?>
 
