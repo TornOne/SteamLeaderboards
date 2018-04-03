@@ -131,8 +131,8 @@ def getPreciseScores(games):
 #try:
 print os.getcwd()
 print sys.path[0]
-os.chdir(sys.path[0])
-print os.getcwd()
+#os.chdir(sys.path[0])
+#print os.getcwd()
 
 games = firstPass()
 getPreciseScores(games)
