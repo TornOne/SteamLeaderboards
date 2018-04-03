@@ -1,4 +1,4 @@
-import urllib, json, math, os, psycopg2
+import urllib, json, math, os, sys, psycopg2
 
 #appid, name, rating, votes, score, platforms, release, price [, tags]
 #  0  ,  1  ,   2   ,   3  ,   4  ,     5    ,    6   ,   7   [,  8  ]
@@ -129,6 +129,9 @@ def getPreciseScores(games):
         game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
 
 try:
+    print os.getcwd()
+    os.chdir(sys.path[0])
+    
     games = firstPass()
     getPreciseScores(games)
     games.sort(key = lambda game: game[4])
