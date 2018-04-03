@@ -128,34 +128,36 @@ def getPreciseScores(games):
             game[2] = 0.5
         game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
 
-try:
-    print os.getcwd()
-    os.chdir(sys.path[0])
-    
-    games = firstPass()
-    getPreciseScores(games)
-    games.sort(key = lambda game: game[4])
-    games.reverse()
+#try:
+print os.getcwd()
+print sys.path[0]
+os.chdir(sys.path[0])
+print os.getcwd()
 
-    #Save results to file
-    fail = open("games.txt", "w")
-    for game in games:
-        fail.write(game[0] + "\t" + game[1] + "\t" + str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t" + str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t" + str(game[7]) + "\n")
-    fail.close()
+games = firstPass()
+getPreciseScores(games)
+games.sort(key = lambda game: game[4])
+games.reverse()
 
-    print "Done!"
+#Save results to file
+fail = open("games.txt", "w")
+for game in games:
+    fail.write(game[0] + "\t" + game[1] + "\t" + str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t" + str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t" + str(game[7]) + "\n")
+fail.close()
 
-    #Save results to database
-    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-    with conn:
-        with conn.cursor() as curs:
-            curs.execute("DELETE FROM games;")
-            curs.copy_from(open("games.txt", "r"), "games")
-    conn.close()
-except:
-    print "ERROR!"
-    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-    with conn:
-        with conn.cursor() as curs:
-            curs.execute("SELECT error_refresh_time()")
-    conn.close()
+print "Done!"
+
+#Save results to database
+conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+with conn:
+    with conn.cursor() as curs:
+        curs.execute("DELETE FROM games;")
+        curs.copy_from(open("games.txt", "r"), "games")
+conn.close()
+##except:
+##    print "ERROR!"
+##    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+##    with conn:
+##        with conn.cursor() as curs:
+##            curs.execute("SELECT error_refresh_time()")
+##    conn.close()
