@@ -143,12 +143,12 @@ try:
     print "Done!"
 
     #Save results to database
-    #conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-    #with conn:
-    #    with conn.cursor() as curs:
-    #        curs.execute("DELETE FROM games;")
-    #        curs.copy_from(open("games.txt", "r"), "games")
-    #conn.close()
+    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+    with conn:
+        with conn.cursor() as curs:
+            curs.execute("DELETE FROM games;")
+            curs.copy_from(open("games.txt", "r"), "games")
+    conn.close()
 except:
     print "ERROR!"
     conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
