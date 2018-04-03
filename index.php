@@ -3,7 +3,7 @@ $conn = pg_connect(getenv("DATABASE_URL"));
 $last_refresh = strtotime(pg_fetch_result(pg_query($conn, 'SELECT * FROM last_refresh;'), 0, 0));
 if (time() - $last_refresh > 86400) { //If the last refresh was more than a day ago
 	pg_query($conn, 'SELECT reset_refresh_time();');
-	exec("python scraper/Scraper.py" . " 2>&1");//" > dev/null &");
+	exec("python scraper/Test.py" . " 2>&1");//" > dev/null &");
 }
 ?>
 
