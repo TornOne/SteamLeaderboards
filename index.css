@@ -3,19 +3,19 @@
 }
 
 .game_listing {
-	margin: 5px auto;
-	max-width: 900px;
-	height: 45px;
+	margin: 0.3125em auto;
+	min-width: 31.25em;
+	max-width: 56.25em;
+	height: 2.8125em;
 	background-color: rgba(0, 0, 0, 0.2);
 	display: flex;
-	justify-content: space-between;
-	overflow: hidden;
 }
 
 .game_listing img {
-	vertical-align: top;
+	width: 7.5em;
 }
 
+/*Potential hack*/
 .owned {
 	position: relative;
 }
@@ -24,49 +24,53 @@
 .owned::before {
 	content: "";
 	position: absolute;
-	width: 15px;
-	height: 15px;
-	top: 5px;
-	left: 100px;
+	width: 1em;
+	height: 1em;
+	top: 0.3em;
+	left: 6.25em;
 	background: rgba(0, 192, 0, 0.8);
-	border-radius: 5px;
+	border-radius: 0.3em;
 }
 
 .game_ranking {
-	flex-grow: 0;
-	margin: auto 0.3vw;
+	margin: auto 0.15em;
 	font-size: 2em;
 }
 
 .game_title_tags {
 	margin: auto 0;
-	flex-grow: 4;
+	flex-grow: 1;
 	display: inline-block;
 }
 
 .game_title {
-	display: flex;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .game_tags {
-	margin: 0;
 	display: inline-block;
+	white-space: nowrap;
 	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .game_tags span {
 	font-size: 0.7em;
-	border-radius: 2px;
-	padding: 1px 3px;
+	border-radius: 0.2em;
+	padding: 0.1em 0.3em;
 	background-color: rgba(103, 193, 245, 0.2);
 	color: #67c1f5;
 }
 
 .game_release_platforms {
 	margin: auto 0;
-	flex-grow: 1;
+	width: 5em;
 	display: inline-block;
 	text-align: center;
+	flex-shrink: 0;
 }
 
 .game_release {
@@ -75,44 +79,36 @@
 	display: block;
 }
 
-.game_platforms {
-	margin: 0;
+.game_platforms span {
+	background-size: cover;
+	opacity: 0.3;
 	display: inline-block;
+	width: 1.25em;
+	height: 1.25em;
 }
 
 .win_icon {
 	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_win.png?v=3");
-	opacity: 0.3;
-	display: inline-block;
-	width: 20px;
-	height: 20px;
 }
 
 .mac_icon {
 	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_mac.png");
-	opacity: 0.3;
-	display: inline-block;
-	width: 20px;
-	height: 20px;
 }
 
 .linux_icon {
 	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_linux.png");
-	opacity: 0.3;
-	display: inline-block;
-	width: 20px;
-	height: 20px;
 }
 
 .game_score_reviews {
-	margin: auto 0.3vw;
+	margin: auto 0;
+	width: 7em;
 	display: inline-block;
-	font-size: 0.75em;
 	text-align: center;
+	flex-shrink: 0;
 }
 
 .game_score {
-	margin: 0;
+	font-size: 0.75em;
 	display: block;
 }
 
@@ -123,4 +119,5 @@
 
 .game_reviews {
 	display: inline-block;
+	font-size: 0.75em;
 }
