@@ -6,7 +6,6 @@ if (time() - $last_refresh > 86400) { //If the last refresh was more than a day 
 	exec("python scraper/Scraper.py" . " > /dev/null &");
 }
 ?>
-
 <?php include 'pieces/head.php';?>
 <script src="/scripts/colorGames.js"></script>
 <link href="index.css" rel="stylesheet" type="text/css"/>

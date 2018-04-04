@@ -136,7 +136,7 @@ def getPreciseScores(games):
 
 try:
     games = firstPass()
-    getPreciseScores(games[-100:])
+    getPreciseScores(games)
     games.sort(key = lambda game: game[4])
     games.reverse()
 
