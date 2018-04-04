@@ -56,7 +56,7 @@ def listGames(pagenr):
         if "Free" in price:
             price = 0
         else:
-            if price[0] == "$": #America
+            if len(price) > 0 and price[0] == "$": #America
                 price = price[1:]
             else: #Europe
                 price = price[:-3].replace(",", ".")
