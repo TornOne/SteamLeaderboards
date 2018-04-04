@@ -1,4 +1,4 @@
-import urllib, json, math, os, sys, psycopg2
+import urllib, json, math, os, psycopg2
 
 #appid, name, rating, votes, score, platforms, release, price [, tags]
 #  0  ,  1  ,   2   ,   3  ,   4  ,     5    ,    6   ,   7   [,  8  ]
@@ -97,7 +97,6 @@ def firstPass():
     page = page[page.find('<div class="search_pagination_right">')+37:]
     page = page[:page.find('</div>')].split()[-14]
     page = int(page[page.rfind("=") + 1:-1])
-    page = 2 #TEMPORARY
 
     for pagenr in xrange(1, page + 1):
         print pagenr,
@@ -120,8 +119,7 @@ def firstPass():
 
     #Filter out low scores
     allGames.sort(key = lambda game: game[4])
-    allGames = allGames[-10:]
-    #allGames = allGames[-9001:] #Database 10K row limit
+    allGames = allGames[-9001:] #Database 10K row limit
     
     return allGames
 
@@ -136,36 +134,28 @@ def getPreciseScores(games):
             game[2] = 0.5
         game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
 
-#try:
-print os.getcwd()
-print sys.path[0]
-#os.chdir(sys.path[0])
-#print os.getcwd()
+try:
+    games = firstPass()
+    getPreciseScores(games[-100:])
+    games.sort(key = lambda game: game[4])
+    games.reverse()
 
-games = firstPass()
-getPreciseScores(games)
-games.sort(key = lambda game: game[4])
-games.reverse()
+    #Save results to file
+    fail = open("games.txt", "w")
+    for game in games:
+        fail.write(game[0] + "\t" + game[1] + "\t" + str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t" + str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t" + str(game[7]) + "\n")
+    fail.close()
 
-#Save results to file
-fail = open("games.txt", "w")
-for game in games:
-    fail.write(game[0] + "\t" + game[1] + "\t" + str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t" + str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t" + str(game[7]) + "\n")
-fail.close()
-
-print "Done!"
-
-#Save results to database
-conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-with conn:
-    with conn.cursor() as curs:
-        curs.execute("DELETE FROM games;")
-        curs.copy_from(open("games.txt", "r"), "games")
-conn.close()
-##except:
-##    print "ERROR!"
-##    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-##    with conn:
-##        with conn.cursor() as curs:
-##            curs.execute("SELECT error_refresh_time()")
-##    conn.close()
+    #Save results to database
+    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+    with conn:
+        with conn.cursor() as curs:
+            curs.execute("DELETE FROM games;")
+            curs.copy_from(open("games.txt", "r"), "games")
+    conn.close()
+except:
+    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+    with conn:
+        with conn.cursor() as curs:
+            curs.execute("SELECT error_refresh_time()")
+    conn.close()
