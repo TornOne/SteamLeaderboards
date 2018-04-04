@@ -35,7 +35,12 @@ def listGames(pagenr):
         date = game[game.find('<div class="col search_released responsive_secondrow">') + 54:]
         date = date[:date.find("</div>")].split()
         try:
-            date = int(date[2]) * 10000 + (["Jan,", "Feb,", "Mar,", "Apr,", "May,", "Jun,", "Jul,", "Aug,", "Sep,", "Oct,", "Nov,", "Dec,"].index(date[1]) + 1) * 100 + int(date[0])
+            date[1] = date[1][:-1]
+            months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+            if date[0] < date[1]: #Europe
+                date = int(date[2]) * 10000 + (months.index(date[1]) + 1) * 100 + int(date[0])
+            else: #America
+                date = int(date[2]) * 10000 + (months.index(date[0]) + 1) * 100 + int(date[1])
         except:
             date = -1 #Fix later with fixDates
 
@@ -51,7 +56,10 @@ def listGames(pagenr):
         if "Free" in price:
             price = 0
         else:
-            price = price[:-3].replace(",", ".")
+            if price[0] == "$": #America
+                price = price[1:]
+            else: #Europe
+                price = price[:-3].replace(",", ".")
             try:
                 price = float(price)
             except:
