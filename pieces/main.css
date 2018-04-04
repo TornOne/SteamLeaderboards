@@ -1,3 +1,10 @@
+/*31.25em, plus a little extra to account for the scrollbar*/
+@media (max-width: 32.75em) {
+	body {
+		font-size: calc(100vw / 32.75)
+	}
+}
+
 body {
 	font-family: sans-serif;
 	color: #c6d4df;
@@ -41,5 +48,5 @@ a {
 .right_corner {
 	position: absolute;
 	right: 0.5em;
-	top: 0;
+	top: 0.5em;
 }

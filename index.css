@@ -40,7 +40,7 @@
 .game_title_tags {
 	margin: auto 0;
 	flex-grow: 1;
-	display: inline-block;
+	min-width: 0;
 }
 
 .game_title {
@@ -51,13 +51,13 @@
 }
 
 .game_tags {
-	display: inline-block;
-	white-space: nowrap;
+	height: 1.25em;
+	display: block;
 	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .game_tags span {
+	white-space: nowrap;
 	font-size: 0.7em;
 	border-radius: 0.2em;
 	padding: 0.1em 0.3em;
@@ -68,7 +68,6 @@
 .game_release_platforms {
 	margin: auto 0;
 	width: 5em;
-	display: inline-block;
 	text-align: center;
 	flex-shrink: 0;
 }
@@ -79,7 +78,12 @@
 	display: block;
 }
 
+.game_platforms {
+	display: block;
+}
+
 .game_platforms span {
+	vertical-align: middle;
 	background-size: cover;
 	opacity: 0.3;
 	display: inline-block;

@@ -16,8 +16,6 @@ if ($next_refresh < 0) {
 	<div class="ranking" itemscope itemtype="http://schema.org/VideoGame">
 		<!--TODO:
 		Add a next refresh timer somewhere
-		Make elements scale down as browser gets narrower to always fit them
-		Name and tags should be properly clipped before the other columns start to be affected
 		Add a flex div and a tag selector to the right
 		Add tags back
 		-->
@@ -39,6 +37,7 @@ if ($next_refresh < 0) {
 					<span>Puzzle</span>
 					<span>Co-op</span>
 					<span>First Person</span>
+					<span>Placeholder 2</span>
 				</span>
 			</div>
 			
