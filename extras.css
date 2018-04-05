@@ -105,9 +105,8 @@
     top: 100%;
     left: 50%;
     margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+	border: 5px solid transparent;
+	border-top-color: #555;
 }
 
 /* Toggle this class - hide and show the popup */

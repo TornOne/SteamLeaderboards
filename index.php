@@ -2,8 +2,12 @@
 $conn = pg_connect(getenv("DATABASE_URL"));
 $next_refresh = strtotime(pg_fetch_result(pg_query($conn, 'SELECT * FROM last_refresh;'), 0, 0)) + 86400 - time(); //Add a day to the last refresh
 if ($next_refresh < 0) {
-	pg_query($conn, 'SELECT reset_refresh_time();');
-	exec("python scraper/Scraper.py" . " > /dev/null &");
+    $output = array();
+    $exit_code = 1;
+	exec("python scraper/Scraper.py" . " > /dev/null &",$output,$exit_code);
+	if ($exit_code == 0) {
+		pg_query($conn, 'SELECT reset_refresh_time();');
+	}
 }
 ?>
 <?php include 'pieces/head.php';?>
@@ -15,6 +19,7 @@ if ($next_refresh < 0) {
 <div class="main" itemscope itemtype="http://schema.org/WebPage">
 	<div class="ranking" itemscope itemtype="http://schema.org/VideoGame">
 		<!--TODO:
+		Database config thing, error messages, at least two refresh timers...
 		Add a next refresh timer somewhere
 		Add a flex div and a tag selector to the right
 		Add tags back
