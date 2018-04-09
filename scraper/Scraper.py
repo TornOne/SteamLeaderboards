@@ -152,10 +152,11 @@ try:
         with conn.cursor() as curs:
             curs.execute("DELETE FROM games;")
             curs.copy_from(open("games.txt", "r"), "games")
+            curs.execute("SELECT update_completed_refresh_time();")
     conn.close()
 except:
     conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
     with conn:
         with conn.cursor() as curs:
-            curs.execute("SELECT error_refresh_time()")
+            curs.execute("SELECT update_failed_refresh_time();")
     conn.close()

@@ -4,6 +4,13 @@ def query(q):
     curs.execute(q)
     return curs.fetchall()
 
+def print_query(q):
+    q = query(q)
+    for line in q:
+        for result in line:
+            print result,
+        print
+
 def reset():
     conn.rollback()
 

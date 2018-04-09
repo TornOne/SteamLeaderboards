@@ -1,13 +1,15 @@
 <?php
 $conn = pg_connect(getenv("DATABASE_URL"));
-$next_refresh = strtotime(pg_fetch_result(pg_query($conn, 'SELECT * FROM last_refresh;'), 0, 0)) + 86400 - time(); //Add a day to the last refresh
+$next_refresh = strtotime(pg_fetch_result(pg_query($conn, "SELECT value FROM config_dates WHERE key='attempted_refresh_time';"), 0, 0)) + 86400 - time(); //Add a day to the last refresh
 if ($next_refresh < 0) {
-    $output = array();
+    $output = array(); //Throwaway
     $exit_code = 1;
 	exec("python scraper/Scraper.py" . " > /dev/null &",$output,$exit_code);
 	if ($exit_code == 0) {
-		pg_query($conn, 'SELECT reset_refresh_time();');
-	}
+		pg_query($conn, 'SELECT update_attempted_refresh_time();');
+	} else {
+	    pg_query($conn, 'SELECT update_failed_refresh_time();');
+    }
 }
 ?>
 <?php include 'pieces/head.php';?>
