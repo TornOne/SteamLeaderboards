@@ -126,3 +126,23 @@
 	display: inline-block;
 	font-size: 0.75em;
 }
+
+.page_selector {
+	text-align: center;
+	margin: 0.5em auto;
+}
+
+.page_selector a {
+	color: #67c1f5;
+	padding: 0 0.5em;
+}
+
+.page_selector span {
+	padding: 0 0.5em;
+}
+
+a.page_button {
+	background-color: rgba(103, 193, 245, 0.2);
+	padding: 0 1em;
+	border-radius: 0.3125em;
+}

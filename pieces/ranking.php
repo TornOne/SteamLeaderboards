@@ -45,6 +45,6 @@
 	<?php } ?>
 
 	<div class="page_selector">
-
+		<a class="page_button"><</a><span>1</span><a>2</a><a>3</a> . . . <a>361</a><a class="page_button">></a>
 	</div>
 </div>

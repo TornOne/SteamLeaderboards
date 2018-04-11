@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php $load_start_time = microtime(true);?>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>

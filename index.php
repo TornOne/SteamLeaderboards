@@ -24,6 +24,7 @@ if ($next_refresh < 0) {
 	Add a next refresh timer somewhere
 	Add a flex div and a tag selector to the right
 	Add tags back
+	Add a price to the right edge of the name? (being the first to be hidden)
 	-->
 	<?php include 'pieces/ranking.php';?>
 </div>

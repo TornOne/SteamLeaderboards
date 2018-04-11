@@ -1,5 +1,5 @@
 <div class="footer">
-    Footer text
+    Page generated in <?=number_format(microtime(true) - $load_start_time, 3)?> seconds
 </div>
 </body>
 </html>
