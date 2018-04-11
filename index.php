@@ -2,14 +2,14 @@
 $conn = pg_connect(getenv("DATABASE_URL"));
 $next_refresh = strtotime(pg_fetch_result(pg_query($conn, "SELECT value FROM config_dates WHERE key='attempted_refresh_time';"), 0, 0)) + 86400 - time(); //Add a day to the last refresh
 if ($next_refresh < 0) {
-    $output = array(); //Throwaway
-    $exit_code = 1;
+	$output = array(); //Throwaway
+	$exit_code = 1;
 	exec("python scraper/Scraper.py" . " > /dev/null &",$output,$exit_code);
 	if ($exit_code == 0) {
 		pg_query($conn, 'SELECT update_attempted_refresh_time();');
 	} else {
-	    pg_query($conn, 'SELECT update_failed_refresh_time();');
-    }
+		pg_query($conn, 'SELECT update_failed_refresh_time();');
+	}
 }
 ?>
 <?php include 'pieces/head.php';?>
@@ -21,7 +21,7 @@ if ($next_refresh < 0) {
 <div class="main">
 	<div class="ranking">
 		<!--TODO:
-		Database config thing, error messages, at least two refresh timers...
+		Updating starts, but the program just abruptly stops midway
 		Add a next refresh timer somewhere
 		Add a flex div and a tag selector to the right
 		Add tags back
@@ -30,11 +30,11 @@ if ($next_refresh < 0) {
 		$offset = 0;
 		$games = pg_query_params($conn, 'SELECT * FROM top_games LIMIT 25 OFFSET $1;', array($offset));
 		while ($row = pg_fetch_row($games)) {
-		    $offset++;
-		    //appid, name, rating, votes, score, platforms, release, price [, tags]
+			$offset++;
+			//appid, name, rating, votes, score, platforms, release, price [, tags]
 		?>
 		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/">
-			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_sm_120.jpg"/>
+			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_231x87.jpg"/>
 			<span class="game_ranking"><?=$offset?>.</span>
 			
 			<div class="game_title_tags">
@@ -70,6 +70,10 @@ if ($next_refresh < 0) {
 			</div>
 		</a>
 		<?php } ?>
+
+        <div class="page_selector">
+
+        </div>
 	</div>
 </div>
 

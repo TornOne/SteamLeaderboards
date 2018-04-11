@@ -13,6 +13,7 @@
 
 .game_listing img {
 	width: 7.5em;
+	flex-shrink: 0;
 }
 
 /*Potential hack*/
