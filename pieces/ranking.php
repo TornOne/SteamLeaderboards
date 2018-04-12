@@ -1,6 +1,16 @@
 <div class="ranking">
 	<?php
-	$offset = 0;
+	$page_count = ceil(pg_fetch_result(pg_query($conn, "SELECT COUNT(*) FROM games;"), 0, 0) / 25);
+	if (isset($_GET["page"]) && $_GET["page"] > 0) {
+		$pagenr = $_GET["page"];
+		if ($pagenr > $page_count) {
+			$pagenr = $page_count;
+		}
+	} else {
+		$pagenr = 1;
+	}
+
+	$offset = ($pagenr - 1) * 25;
 	$games = pg_query_params($conn, 'SELECT * FROM top_games LIMIT 25 OFFSET $1;', array($offset));
 	while ($row = pg_fetch_row($games)) {
 		$offset++;
@@ -45,6 +55,28 @@
 	<?php } ?>
 
 	<div class="page_selector">
-		<a class="page_button"><</a><span>1</span><a>2</a><a>3</a> . . . <a>361</a><a class="page_button">></a>
+		<?php if ($pagenr != 1) { ?>
+			<a class="page_button" href="/index.php?page=<?=$pagenr - 1?>"><</a><a href="/index.php?page=1">1</a>
+		<?php }
+
+		if ($pagenr > 4) {
+			echo " . . . ";
+		}
+
+		for ($i = max(2, $pagenr - 2); $i < $pagenr; $i++) { ?>
+			<a href="/index.php?page=<?=$i?>"><?=$i?></a>
+		<?php }
+		echo "<span>$pagenr</span>";
+		for ($i = $pagenr + 1; $i < min($pagenr + 3, $page_count); $i++) { ?>
+			<a href="/index.php?page=<?=$i?>"><?=$i?></a>
+		<?php }
+
+		if ($pagenr < $page_count - 3) {
+			echo " . . . ";
+		}
+
+		if ($pagenr != $page_count) { ?>
+			<a href="/index.php?page=<?=$page_count?>"><?=$page_count?></a><a class="page_button" href="/index.php?page=<?=$pagenr + 1?>">></a>
+		<?php } ?>
 	</div>
 </div>
