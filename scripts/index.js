@@ -1,19 +1,21 @@
-//Color games
-addEventListener("load", function() {
-	var games = localStorage.getItem("steamGames").split(",");
+addEventListener("load", colorGames);
+
+function colorGames() {
+	var games = localStorage.getItem("steamGames");
 	if (games) {
+		games = games.split(",");
 		var matches = document.querySelectorAll(".game_listing");
 		for (var i = 0; i < matches.length; i++) {
 			var appid = matches[i].getAttribute("href");
 			appid = appid.substr(0, appid.length - 1);
 			appid = appid.substr(appid.lastIndexOf("/") + 1);
-			
+
 			if (games.includes(appid)) {
 				matches[i].classList.add("owned");
 			}
 		}
 	}
-});
+}
 
 function loadPage(query, isNewPage) {
 	var pairs = query.split("&");
@@ -27,6 +29,7 @@ function loadPage(query, isNewPage) {
 
 	req.onload = function() {
 		document.getElementById("ranking").outerHTML = this.responseText;
+		colorGames();
 		if (isNewPage) {
 			history.pushState(params, "Page " + params["page"], "?" + query);
 		}
