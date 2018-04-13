@@ -1,9 +1,9 @@
 window.onload = function() {
-	var parts = location.search.substr(1).split("&");
+	var pairs = location.search.substr(1).split("&");
 	var params = {};
 	
-	for (var i = 0; i < parts.length; i++) {
-		var p = parts[i].split("=");
+	for (var i = 0; i < pairs.length; i++) {
+		var p = pairs[i].split("=");
 		params[p[0]] = p[1];
 	}
 	

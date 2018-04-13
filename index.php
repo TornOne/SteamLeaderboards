@@ -13,7 +13,7 @@ if ($next_refresh < 0) {
 }
 ?>
 <?php include 'pieces/head.php';?>
-<script src="/scripts/colorGames.js"></script>
+<script src="/scripts/index.js"></script>
 <link href="index.css" rel="stylesheet" type="text/css"/>
 </head>
 <?php include 'pieces/header.php';?>

@@ -1,5 +1,9 @@
-<div class="ranking">
+<div id="ranking">
 	<?php
+	if (!isset($conn)) {
+		$conn = pg_connect(getenv("DATABASE_URL"));
+	}
+
 	$page_count = ceil(pg_fetch_result(pg_query($conn, "SELECT COUNT(*) FROM games;"), 0, 0) / 25);
 	if (isset($_GET["page"]) && $_GET["page"] > 0) {
 		$pagenr = $_GET["page"];
@@ -56,7 +60,7 @@
 
 	<div class="page_selector">
 		<?php if ($pagenr != 1) { ?>
-			<a class="page_button" href="/index.php?page=<?=$pagenr - 1?>"><</a><a href="/index.php?page=1">1</a>
+			<a class="page_button" href="/index.php?page=<?=$pagenr - 1?>" onclick="parseLoadPage(this); return false;"><</a><a href="/index.php?page=1" onclick="parseLoadPage(this); return false;">1</a>
 		<?php }
 
 		if ($pagenr > 4) {
@@ -64,11 +68,11 @@
 		}
 
 		for ($i = max(2, $pagenr - 2); $i < $pagenr; $i++) { ?>
-			<a href="/index.php?page=<?=$i?>"><?=$i?></a>
+			<a href="/index.php?page=<?=$i?>" onclick="parseLoadPage(this); return false;"><?=$i?></a>
 		<?php }
 		echo "<span>$pagenr</span>";
 		for ($i = $pagenr + 1; $i < min($pagenr + 3, $page_count); $i++) { ?>
-			<a href="/index.php?page=<?=$i?>"><?=$i?></a>
+			<a href="/index.php?page=<?=$i?>" onclick="parseLoadPage(this); return false;"><?=$i?></a>
 		<?php }
 
 		if ($pagenr < $page_count - 3) {
@@ -76,7 +80,7 @@
 		}
 
 		if ($pagenr != $page_count) { ?>
-			<a href="/index.php?page=<?=$page_count?>"><?=$page_count?></a><a class="page_button" href="/index.php?page=<?=$pagenr + 1?>">></a>
+			<a href="/index.php?page=<?=$page_count?>" onclick="parseLoadPage(this); return false;"><?=$page_count?></a><a class="page_button" href="/index.php?page=<?=$pagenr + 1?>" onclick="parseLoadPage(this); return false;">></a>
 		<?php } ?>
 	</div>
 </div>
