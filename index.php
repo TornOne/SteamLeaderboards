@@ -3,7 +3,6 @@ $conn = pg_connect(getenv("DATABASE_URL"));
 $next_refresh = strtotime(pg_fetch_result(pg_query($conn, "SELECT value FROM config_dates WHERE key='attempted_refresh_time';"), 0, 0)) + 86400 - time(); //Add a day to the last refresh
 if ($next_refresh < 0) {
 	$return_code = exec("python scraper/Start.py");
-	echo $return_code;
 	if ($return_code == "201 Created") {
 		pg_query($conn, 'SELECT update_attempted_refresh_time();');
 	} else {
