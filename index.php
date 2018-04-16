@@ -4,7 +4,7 @@ $next_refresh = strtotime(pg_fetch_result(pg_query($conn, "SELECT value FROM con
 if ($next_refresh < 0) {
     $timeout = 7500; // Dyno timeout in seconds
     $url = "https://api.heroku.com/apps/steamleaderboards/dynos";
-    $data = array("command" => "scraper", "size" => "free", "type" => "run", "timeout" => $timeout);
+    $data = array("command" => "scraper", "size" => "free", "type" => "run", "time_to_live" => $timeout);
     $options = array(
         "http" => array(
             "header" => "Authorization: Bearer $API_TOKEN",
