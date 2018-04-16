@@ -7,6 +7,7 @@ if ($next_refresh < 0) {
     $data = array("command" => "scraper", "size" => "free", "type" => "run", "timeout" => $timeout);
     $options = array(
         "http" => array(
+            "header" => "Authorization: Bearer $API_TOKEN",
             "method" => "POST",
             "content" => http_build_query($data)
         )
