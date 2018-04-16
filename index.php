@@ -8,9 +8,9 @@ if ($next_refresh < 0) {
     $options = array(
         "http" => array(
             "header" => array(
-                "Content-Type: application/json",
-                "Authorization: Bearer $API_TOKEN",
-                "Accept: application/vnd.heroku+json; version=3"
+                "Content-Type" => "application/json",
+                "Authorization" => "Bearer $API_TOKEN",
+                "Accept" => "application/vnd.heroku+json; version=3"
             ),
             "method" => "POST",
             "content" => http_build_query($data)
