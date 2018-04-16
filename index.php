@@ -7,7 +7,10 @@ if ($next_refresh < 0) {
     $data = array("command" => "scraper", "size" => "free", "type" => "run", "time_to_live" => $timeout);
     $options = array(
         "http" => array(
-            "header" => "Authorization: Bearer $API_TOKEN",
+            "header" => array(
+                "Authorization: Bearer $API_TOKEN",
+                "Accept: application/vnd.heroku+json; version=3"
+            ),
             "method" => "POST",
             "content" => http_build_query($data)
         )
