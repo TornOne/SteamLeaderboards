@@ -7,9 +7,13 @@ if ($next_refresh < 0) {
     $data = array("command" => "scraper", "size" => "free", "type" => "run", "time_to_live" => $timeout);
     $options = array(
         "http" => array(
-            "header" => "Content-Type: application/json\r\n" . "Authorization: Bearer $API_TOKEN\r\n" . "Accept: application/vnd.heroku+json; version=3\r\n",
+            "header" => array(
+                "Content-Type" => "application/x-www-form-urlencoded",
+                "Authorization" => "Bearer $API_TOKEN",
+                "Accept" => "application/vnd.heroku+json; version=3"
+            ),
             "method" => "POST",
-            "content" => '{"type": "run", "time_to_live": 7500, "command": "scraper", "size": "free"}'
+            "content" => http_build_query($data)
         )
     );
     $context = stream_context_create($options);
