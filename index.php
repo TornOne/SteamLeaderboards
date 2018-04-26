@@ -18,7 +18,6 @@ if ($next_refresh < 0) {
 
 <div class="main">
     <!--TODO:
-	Updating starts, but the program just abruptly stops midway
 	Add a next refresh timer somewhere
 	Add a flex div and a tag selector to the right
 	Add tags back

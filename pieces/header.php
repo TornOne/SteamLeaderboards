@@ -3,7 +3,7 @@
 	<div class="right_corner">
 		<div id="login" hidden="hidden">
 			<form action="https://steamcommunity.com/openid/login" method="post">
-				<button id="loginbutton"><img alt="Sign in through Steam" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/steamworks_docs/english/sits_small.png"/></button>
+				<button id="login_button"><img alt="Sign in through Steam" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/steamworks_docs/english/sits_small.png"/></button>
 				<input name="openid.ns" value="http://specs.openid.net/auth/2.0" type="hidden"/>
 				<input name="openid.mode" value="checkid_setup" type="hidden"/>
 				<input name="openid.claimed_id" value="http://specs.openid.net/auth/2.0/identifier_select" type="hidden"/>
@@ -20,10 +20,4 @@
 	<div class="title">
 		<a href="/index.php">Steam Leaderboards</a>
 	</div>
-
-    <div class="navigation_bar">
-		<a href="/index.php">Ranking</a>
-        <a href="/about.php">About</a>
-        <a href="/extras.php">Extras</a>
-    </div>
 </div>

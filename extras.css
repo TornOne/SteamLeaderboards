@@ -22,23 +22,6 @@
 	width: 5em;
 }
 
-.donate_button {
-	margin: 1em;
-}
-
-.donate_button button {
-	font-size: 1.5em;
-	font-weight: bold;
-	color: #171a21;
-	background-color: #ff9400;
-	border-radius: 20px;
-	padding: 2px 10px;
-}
-
-.donate_button button:hover {
-	background-color: rgba(255, 148, 0, 0.8);
-}
-
 .newsletter {
 	margin: 1em;
 }

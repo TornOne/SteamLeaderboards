@@ -129,6 +129,7 @@
 
 .page_selector {
 	text-align: center;
+	min-width: 31.25em;
 	margin: 0.5em auto;
 }
 

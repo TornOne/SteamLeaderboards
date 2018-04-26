@@ -12,31 +12,17 @@ a {
 }
 
 .header {
+	padding: 1em 0;
 	text-align: center;
 	background-color: #171a21;
-}
-
-.footer {
-	padding: 1em;
-	text-align: center;
-	background-color: #171a21;
+	min-width: 31.25em;
 }
 
 .title {
 	font-variant: small-caps;
 	font-weight: bold;
 	font-size: 3em;
-	padding: 0 0.5em;
-}
-
-.navigation_bar {
-	background-color: #171a21;
-	padding: 0.5em;
-}
-
-.navigation_bar a {
-	text-align: center;
-	margin: 1em;
+	padding: 0 1em;
 }
 
 .right_corner {
@@ -45,15 +31,26 @@ a {
 	top: 0.5em;
 }
 
-#loginbutton {
+#login_button {
 	padding: 0;
 	border: 0;
 	border-radius: 100%;
 	font-size: 1em;
 }
 
-#loginbutton img {
+#login_button img {
 	vertical-align: bottom;
 	width: 9.625em;
 	height: 1.4375em;
+}
+
+.footer {
+	padding: 1em 0;
+	text-align: center;
+	background-color: #171a21;
+	min-width: 31.25em;
+}
+
+.footer a {
+	text-decoration: underline;
 }
