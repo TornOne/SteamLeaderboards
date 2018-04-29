@@ -1,17 +1,22 @@
 addEventListener("load", checkLoggedIn);
 
 function checkLoggedIn() {
-	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId") && localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
-		var logout = document.getElementById("logout");
-		logout.removeAttribute("hidden");
-		updateAvatar();
+	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId")) {
+		if (localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
+			document.getElementById("logout").removeAttribute("hidden");
+			updateAvatar();
+			colorGames();
+		} else if (Date.now() - localStorage.getItem("refreshTime") > 604800000) { //Automatic refresh after a week
+			refresh();
+			document.getElementById("logout").removeAttribute("hidden");
+		}
 	} else {
 		document.getElementById("login").removeAttribute("hidden");
 	}
 }
 
 function updateAvatar() {
-	var avatar = logout.querySelector("img");
+	var avatar = document.querySelector("#logout img");
 	avatar.alt = localStorage.getItem("steamName");
 	avatar.src = localStorage.getItem("steamAvatar");
 	avatar.title = localStorage.getItem("steamName");
