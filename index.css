@@ -4,7 +4,6 @@
 
 .game_listing {
 	margin: 0.3125em auto;
-	min-width: 31.25em;
 	max-width: 56.25em;
 	height: 2.8125em;
 	background-color: rgba(0, 0, 0, 0.2);
@@ -126,6 +125,8 @@
 	display: inline-block;
 	font-size: 0.75em;
 }
+
+/* ------------------------ */
 
 .page_selector {
 	text-align: center;

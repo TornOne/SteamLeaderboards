@@ -4,6 +4,7 @@ body {
 	background: #1B2838 url("/images/background.jpg") no-repeat fixed center top;
 	background-size: cover;
 	margin: 0;
+	min-width: 31.25em;
 }
 
 a {
@@ -11,11 +12,13 @@ a {
 	color: #c6d4df;
 }
 
+/* ------------------------ */
+
 .header {
 	padding: 1em 0;
 	text-align: center;
 	background-color: #171a21;
-	min-width: 31.25em;
+	position: relative;
 }
 
 .title {
@@ -24,6 +27,8 @@ a {
 	font-size: 3em;
 	padding: 0 1em;
 }
+
+/* ------------------------ */
 
 .right_corner {
 	position: absolute;
@@ -44,11 +49,42 @@ a {
 	height: 1.4375em;
 }
 
+#logout img {
+	width: 2em;
+	height: 2em;
+	border: 0.125em solid #4887A0;
+	border-radius: 0.2em;
+}
+
+.dropdown {
+	background-color: #171a21;
+	width: 5em;
+	box-shadow: 0 0 0.75em #000000;
+	position: absolute;
+	right: 0;
+	z-index: 1;
+}
+
+.dropdown a {
+	display: none;
+	padding: 0.3em 0.75em;
+}
+
+.dropdown a:hover {
+	background-color: #373D44;
+	color: #ffffff;
+}
+
+#logout:hover .dropdown a {
+	display: block;
+}
+
+/* ------------------------ */
+
 .footer {
 	padding: 1em 0;
 	text-align: center;
 	background-color: #171a21;
-	min-width: 31.25em;
 }
 
 .footer a {

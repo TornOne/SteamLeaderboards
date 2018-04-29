@@ -14,6 +14,11 @@
 		</div>
 		
 		<div id="logout" hidden="hidden">
+			<img alt="" src="" title=""/>
+			<div class="dropdown">
+				<a href="javascript:refresh()">Refresh</a>
+				<a href="javascript:logout()">Logout</a>
+			</div>
 		</div>
 	</div>
 	

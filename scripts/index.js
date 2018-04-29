@@ -1,4 +1,56 @@
-addEventListener("load", colorGames);
+addEventListener("load", checkLoggedIn);
+
+function checkLoggedIn() {
+	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId") && localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
+		var logout = document.getElementById("logout");
+		logout.removeAttribute("hidden");
+		updateAvatar();
+	} else {
+		document.getElementById("login").removeAttribute("hidden");
+	}
+}
+
+function updateAvatar() {
+	var avatar = logout.querySelector("img");
+	avatar.alt = localStorage.getItem("steamName");
+	avatar.src = localStorage.getItem("steamAvatar");
+	avatar.title = localStorage.getItem("steamName");
+}
+
+function refresh() {
+	if (Date.now() - localStorage.getItem("refreshTime") > 86400000) { //At most one refresh per day
+		login();
+		updateAvatar();
+		unColorGames();
+		colorGames();
+	}
+}
+
+function login() {
+	var req = new XMLHttpRequest();
+
+	req.onload = function() {
+		var userdata = JSON.parse(this.responseText);
+		localStorage.setItem("refreshTime", Date.now());
+		localStorage.setItem("steamName", userdata["user"]["response"]["players"]["0"]["personaname"]);
+		localStorage.setItem("steamAvatar", userdata["user"]["response"]["players"]["0"]["avatarmedium"]);
+		var games = userdata["games"]["response"]["games"];
+		for (var i = 0; i < games.length; i++) {
+			games[i] = games[i]["appid"];
+		}
+		localStorage.setItem("steamGames", games);
+	};
+
+	req.open("GET", "http://steamleaderboards.herokuapp.com/login/fetchUserData.php?id=" + localStorage.getItem("steamId"));
+	req.send();
+}
+
+function logout() {
+	localStorage.clear();
+	unColorGames();
+	document.getElementById("logout").setAttribute("hidden", "hidden");
+	document.getElementById("login").removeAttribute("hidden");
+}
 
 function colorGames() {
 	var games = localStorage.getItem("steamGames");
@@ -16,6 +68,15 @@ function colorGames() {
 		}
 	}
 }
+
+function unColorGames() {
+	var matches = document.querySelectorAll(".owned");
+	for (var i = 0; i < matches.length; i++) {
+		matches[i].classList.remove("owned");
+	}
+}
+
+//Page switching stuff
 
 function loadPage(query, isNewPage) {
 	var pairs = query.split("&");

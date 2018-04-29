@@ -7,4 +7,3 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steam Leaderboards</title>
     <link href="/pieces/header.css" rel="stylesheet" type="text/css"/>
-	<script src="/scripts/checkLoggedIn.js"></script>

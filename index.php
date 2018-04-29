@@ -18,7 +18,7 @@ if ($next_refresh < 0) {
 
 <div class="main">
     <!--TODO:
-	Add a next refresh timer somewhere
+    Change size on long ranking numbers / remove images when page is narrow
 	Add a flex div and a tag selector to the right
 	Add tags back
 	Add a price to the right edge of the name? (being the first to be hidden)
