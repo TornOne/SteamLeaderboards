@@ -1,14 +1,12 @@
 addEventListener("load", checkLoggedIn);
 
 function checkLoggedIn() {
-	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId")) {
-		if (localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
-			document.getElementById("logout").removeAttribute("hidden");
-			updateAvatar();
-			colorGames();
-		} else if (Date.now() - localStorage.getItem("refreshTime") > 604800000) { //Automatic refresh after a week
+	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId") && localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
+		document.getElementById("logout").removeAttribute("hidden");
+		updateAvatar();
+		colorGames();
+		if (Date.now() - localStorage.getItem("refreshTime") > 604800000) { //Automatic refresh after a week
 			refresh();
-			document.getElementById("logout").removeAttribute("hidden");
 		}
 	} else {
 		document.getElementById("login").removeAttribute("hidden");

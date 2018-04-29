@@ -14,6 +14,13 @@ window.onload = function() {
 			var userdata = JSON.parse(this.responseText);
 			localStorage.setItem("refreshTime", Date.UTC(2000));
 			localStorage.setItem("steamId", userdata["user"]["response"]["players"]["0"]["steamid"]);
+			localStorage.setItem("steamName", userdata["user"]["response"]["players"]["0"]["personaname"]);
+			localStorage.setItem("steamAvatar", userdata["user"]["response"]["players"]["0"]["avatarmedium"]);
+			var games = userdata["games"]["response"]["games"];
+			for (var i = 0; i < games.length; i++) {
+				games[i] = games[i]["appid"];
+			}
+			localStorage.setItem("steamGames", games);
 			location.replace(decodeURIComponent(params["return_to"]));
 		};
 		
