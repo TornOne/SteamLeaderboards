@@ -34,14 +34,22 @@ function login() {
 
 	req.onload = function() {
 		var userdata = JSON.parse(this.responseText);
+
 		localStorage.setItem("refreshTime", Date.now());
 		localStorage.setItem("steamName", userdata["user"]["response"]["players"]["0"]["personaname"]);
 		localStorage.setItem("steamAvatar", userdata["user"]["response"]["players"]["0"]["avatarmedium"]);
+
 		var games = userdata["games"]["response"]["games"];
 		for (var i = 0; i < games.length; i++) {
 			games[i] = games[i]["appid"];
 		}
 		localStorage.setItem("steamGames", games);
+
+		var wishlist = userdata["wishlist"];
+		for (var i = 0; i < wishlist.length; i++) {
+			wishlist[i] = wishlist[i]["appid"];
+		}
+		localStorage.setItem("steamWishlist", wishlist);
 	};
 
 	req.open("GET", "http://steamleaderboards.herokuapp.com/login/fetchUserData.php?id=" + localStorage.getItem("steamId"));
@@ -57,16 +65,24 @@ function logout() {
 
 function colorGames() {
 	var games = localStorage.getItem("steamGames");
-	if (games) {
-		games = games.split(",");
+	var wishlist = localStorage.getItem("steamWishlist");
+	if (games || wishlist) {
+		if (games) {
+			games = games.split(",");
+		}
+		if (wishlist) {
+			wishlist = wishlist.split(",");
+		}
 		var matches = document.querySelectorAll(".game_listing");
 		for (var i = 0; i < matches.length; i++) {
 			var appid = matches[i].getAttribute("href");
 			appid = appid.substr(0, appid.length - 1);
 			appid = appid.substr(appid.lastIndexOf("/") + 1);
 
-			if (games.includes(appid)) {
+			if (games && games.includes(appid)) {
 				matches[i].classList.add("owned");
+			} else if (wishlist && wishlist.includes(appid)) {
+				matches[i].classList.add("wanted");
 			}
 		}
 	}
@@ -76,6 +92,10 @@ function unColorGames() {
 	var matches = document.querySelectorAll(".owned");
 	for (var i = 0; i < matches.length; i++) {
 		matches[i].classList.remove("owned");
+	}
+	matches = document.querySelectorAll(".wanted");
+	for (i = 0; i < matches.length; i++) {
+		matches[i].classList.remove("wanted");
 	}
 }
 
