@@ -63,10 +63,11 @@ a {
 	position: absolute;
 	right: 0;
 	z-index: 1;
+	display: none;
 }
 
 .dropdown a {
-	display: none;
+	display: block;
 	padding: 0.3em 0.75em;
 }
 
@@ -75,7 +76,7 @@ a {
 	color: #ffffff;
 }
 
-#logout:hover .dropdown a {
+#logout:hover .dropdown {
 	display: block;
 }
 

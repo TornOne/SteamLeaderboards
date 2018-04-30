@@ -3,6 +3,7 @@
 }
 
 .game_listing {
+	position: relative;
 	margin: 0.3125em auto;
 	max-width: 56.25em;
 	height: 2.8125em;
@@ -15,29 +16,37 @@
 	flex-shrink: 0;
 }
 
-/*Potential hack*/
-.owned, .wanted {
-	position: relative;
+.owned::before, .wanted::before {
+	position: absolute;
+	font-size: 0.625em;
+	color: #111111;
+	white-space: nowrap;
+	overflow: hidden;
+	line-height: 1.7em;
+	padding-left: 1.7em;
+	width: 0;
+	height: 1.7em;
+	top: 1.4em;
+	left: 0;
+	transition: width 0.5s;
 }
 
-/*Replace with Steam's owned and wishlist icons*/
-.owned::before, .wanted::before {
-	content: "";
-	position: absolute;
-	width: 1em;
-	height: 1em;
-	top: 0.3em;
-	left: 6.25em;
-	background: rgba(0, 192, 0, 0.8);
-	border-radius: 0.3em;
+.owned:hover::before {
+	width: 6.4em;
+}
+
+.wanted:hover::before {
+	width: 7.2em;
 }
 
 .owned::before {
-	background: rgba(0, 192, 0, 0.8);
+	content: "IN LIBRARY";
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAGXRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjIx8SBplQAAAChJREFUeNpj+P//PwM1MQPNDBQUFPxPCR41cDSWR2N5NJZHY5nGsQwAn8dTPlxyKNEAAAAASUVORK5CYII=') no-repeat 0.35em/1em 1em rgba(79, 149, 189, 0.8);
 }
 
 .wanted::before {
-	background: rgba(192, 192, 192, 0.8);
+	content: "ON WISHLIST";
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAGXRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjIx8SBplQAAAGRJREFUeNpjYIACQUHB/yTgw////2fAhhnINBCnoRgGMuAAMA0CAgLdQHXXcRlKtIEwADSwHp+h5BqI01BKDIQZCtZH0EBCkQIzAKdDaG4gsWDgDCTk5YE3cDQMh3MYkotpZiAAHbQmtnYYBxkAAAAASUVORK5CYII=') no-repeat 0.35em/1em 1em rgba(211, 222, 234, 0.8);
 }
 
 .game_ranking {
@@ -100,15 +109,15 @@
 }
 
 .win_icon {
-	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_win.png?v=3");
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOFJREFUeNpj+P//PwM1McOwMlAQiDWA2AGI44C4BojnAPF8fAYKA7E2EDsDcRIQ1wGxOxDvBOIXQPzrPyZ4isvAbUD8Coh/o2mo+I8f3MZl4HcsikGGFwHxN3IMfEttA99hUfwHauB3cgx8j0XxPyAuBuIfeAy8i8vANCDOQ8M5QGwIxFlY5GA4DpeBt4D4NRp+DsSZQPwIixwMn8Jl4Ac8Xv6Jx8v36BbLH6ht4DMcGkoJeBmngUpAbA3E4VBDpgLxBiBOxpGkYOAhqaUNM9QySyAOgUbSJKhlp4H40NAqYAEEslgOSinEogAAAABJRU5ErkJggg==');
 }
 
 .mac_icon {
-	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_mac.png");
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANJJREFUeNpj+P//PwM1McNAGqgBxIeAeB01DOQH4mv/IaCdGgZGQQ07DsSS5BgYAMRrgXg/EM8G4jIg3g3EO4B4GxBvgFrCRMhAdiBu/I8JvgLxFyziOYQMjMWhERs4A8SyhAzc8J944E1MGO4n0rAP0JinmoF/gdiWGANnkeBlrEkI3UA/IH5LgqEnCRnIAsR9JBi4hJiELQPEd4kw7DUQaxGbU1yB+DNU4x8gPg3EF6GRAQI/gDiU1LycBsS7gLgCiFWBWBOai0Bi6YOyPBwYAwEzzCay2PxovAAAAABJRU5ErkJggg==');
 }
 
 .linux_icon {
-	background-image: url("http://store.akamai.steamstatic.com/public/images/v6/icon_platform_linux.png");
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAABQUlEQVR42s2UwSsFURSHx8oGeSsb2foLPHp5eykbURZsKYuXFPkHFBZ2Nq9HiUf21hZWFMWKFbG1oSgNGt+tn5qmM2dST7n11XTv6Zt77jn3RkmSRK0k+jNhdjA3BDvwAB8Qwx3UYcCIt4V8d8JhUjz2ocsVSnZRIPpMfZ//SPOE3s6uYTAIoC8V2zSFMOzIXiVpwKrS7dcOwyhbwj1HeAwTMKLddMAmLGi9bgkfHeEYjMKkhD2wDstav7eEIZ03Q9aQpA02YAu2dQQ3ionzitKtNG4VdBLSy/Rb6IQqnKZ+GruNrd2UYAZmU/NT8GxkYaZcg2loz8iX1C67zhmbRalq8QnGoVfCFZgvaPZy3hkeKSBUfA7WYBHOHFmz6OpdKvAdruDFkflXTwvhah205HHIFKOiQoTn6+vXz9e/fbG/ATlKssyLfHz8AAAAAElFTkSuQmCC');
 }
 
 .game_score_reviews {
