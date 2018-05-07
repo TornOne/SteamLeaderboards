@@ -1,4 +1,4 @@
-import urllib, json, math, os, psycopg2
+import urllib, json, math, os, psycopg2, multiprocessing
 
 #appid, name, rating, votes, score, platforms, release, price [, tags]
 #  0  ,  1  ,   2   ,   3  ,   4  ,     5    ,    6   ,   7   [,  8  ]
@@ -90,7 +90,6 @@ def fixDates(games):
 
 #Get all the games, but with imprecise scores
 def firstPass():
-    allGames = []
     #Find the total number of pages
     page = urllib.urlopen("http://store.steampowered.com/search/?sort_by=Released_DESC&category1=998&page=1")
     page = page.read()
@@ -98,12 +97,11 @@ def firstPass():
     page = page[:page.find('</div>')].split()[-14]
     page = int(page[page.rfind("=") + 1:-1])
 
-    for pagenr in xrange(1, page + 1):
-        print pagenr,
-        games = listGames(pagenr)
-        games.reverse()
-        allGames = games + allGames
-
+    games = pool.map(listGames, range(1, page + 1))
+    allGames = []
+    for game in games:
+        allGames += game
+    allGames.reverse()
     fixDates(allGames)
 
     #Filter out duplicates
@@ -123,40 +121,47 @@ def firstPass():
     
     return allGames
 
-def getPreciseScores(games):
-    for game in games:
-        page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[7] <= 0 else "steam"))
-        contents = json.loads(page.read())
-        game[3] = contents["query_summary"]["total_reviews"]
-        if game[3] != 0:
-            game[2] = float(contents["query_summary"]["total_positive"]) / game[3]
-        else:
-            game[2] = 0.5
-        game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
+def getPreciseScore(game):
+    page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[7] <= 0 else "steam"))
+    contents = json.loads(page.read())
+    game[3] = contents["query_summary"]["total_reviews"]
+    if game[3] != 0:
+        game[2] = float(contents["query_summary"]["total_positive"]) / game[3]
+    else:
+        game[2] = 0.5
+    game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
+    return (game[2], game[3], game[4]) #Multiprocessing pools create new instances or something, so list values don't get updated
 
-try:
-    games = firstPass()
-    getPreciseScores(games)
-    games.sort(key = lambda game: game[4])
-    games.reverse()
+#Multiprocessing, 20 processes
+if __name__ == "__main__":
+    try:
+        pool = multiprocessing.Pool(20)
 
-    #Save results to file
-    fail = open("games.txt", "w")
-    for game in games:
-        fail.write(game[0] + "\t" + game[1] + "\t" + str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t" + str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t" + str(game[7]) + "\n")
-    fail.close()
+        games = firstPass()
+        newScores = pool.map(getPreciseScore, games)
+        for i in range(len(games)):
+            for j in range(3):
+                games[i][j + 2] = newScores[i][j]
+        games.sort(key = lambda game: game[4])
+        games.reverse()
 
-    #Save results to database
-    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-    with conn:
-        with conn.cursor() as curs:
-            curs.execute("DELETE FROM games;")
-            curs.copy_from(open("games.txt", "r"), "games")
-            curs.execute("SELECT update_completed_refresh_time();")
-    conn.close()
-except:
-    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-    with conn:
-        with conn.cursor() as curs:
-            curs.execute("SELECT update_failed_refresh_time();")
-    conn.close()
+        #Save results to file
+        fail = open("games.txt", "w")
+        for game in games:
+            fail.write(game[0] + "\t" + game[1] + "\t" + str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t" + str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t" + str(game[7]) + "\n")
+        fail.close()
+
+        #Save results to database
+        conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+        with conn:
+            with conn.cursor() as curs:
+                curs.execute("DELETE FROM games;")
+                curs.copy_from(open("games.txt", "r"), "games")
+                curs.execute("SELECT update_completed_refresh_time();")
+        conn.close()
+    except:
+        conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+        with conn:
+            with conn.cursor() as curs:
+                curs.execute("SELECT update_failed_refresh_time();")
+        conn.close()

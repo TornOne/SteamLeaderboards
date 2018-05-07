@@ -2,3 +2,4 @@
 desktop.ini
 scraper/games.txt
 vendor/
+*.pyc
