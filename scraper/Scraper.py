@@ -1,8 +1,7 @@
 import urllib, json, math, os, psycopg2, multiprocessing
 
-#appid, name, rating, votes, score, platforms, release, price [, tags]
-#  0  ,  1  ,   2   ,   3  ,   4  ,     5    ,    6   ,   7   [,  8  ]
-#TODO: Tags
+#appid, name, rating, votes, score, platforms, release, price, tags
+#  0  ,  1  ,   2   ,   3  ,   4  ,     5    ,    6   ,   7  ,  8
 
 def listGames(pagenr):
     page = urllib.urlopen("http://store.steampowered.com/search/?sort_by=Released_DESC&category1=998&page=" + str(pagenr))
@@ -78,7 +77,7 @@ def listGames(pagenr):
         name = game[game.find('<span class="title">') + 20:]
         name = name[:name.find("</span>")]
 
-        games.append([appid, name, rating, votes, score, platforms, date, price])
+        games.append([appid, name, rating, votes, score, platforms, date, price, []])
         
     return games
 
@@ -130,25 +129,44 @@ def getPreciseScore(game):
     else:
         game[2] = 0.5
     game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
-    return (game[2], game[3], game[4]) #Multiprocessing pools create new instances or something, so list values don't get updated
+    #Multiprocessing pools create new instances or something, so list values don't get updated and have to be assigned outside
+    return (game[2], game[3], game[4])
 
-#Multiprocessing, 20 processes
+def getTags(game):
+    page = urllib.urlopen("http://store.steampowered.com/apphoverpublic/" + game[0])
+    contents = page.read()
+    tags = contents.split('<div class="app_tag">')
+    #Only the top 75% of the tags, which is an approximation of what Steam does
+    for tag in tags[1:int(0.75 * (len(tags) + 1))]:
+        game[8].append(tag[:tag.find("<")])
+    #Multiprocessing pools create new instances or something, so list values don't get updated and have to be assigned outside
+    return game[8]
+
+#Multiprocessing, 15 processes, should take about 20 minutes for the foreseeable future
 if __name__ == "__main__":
     try:
-        pool = multiprocessing.Pool(20)
+        pool = multiprocessing.Pool(15)
 
         games = firstPass()
         newScores = pool.map(getPreciseScore, games)
+        tags = pool.map(getTags, games)
         for i in range(len(games)):
             for j in range(3):
                 games[i][j + 2] = newScores[i][j]
+            games[i][8] = tags[i]
         games.sort(key = lambda game: game[4])
         games.reverse()
 
         #Save results to file
         fail = open("games.txt", "w")
         for game in games:
-            fail.write(game[0] + "\t" + game[1] + "\t" + str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t" + str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t" + str(game[7]) + "\n")
+            fail.write(game[0] + "\t" + game[1] + "\t")
+            fail.write(str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t")
+            fail.write(str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t")
+            fail.write(str(game[7]) + "\t{")
+            for tag in game[8][:-1]:
+                fail.write(tag + ", ")
+            fail.write((game[8][-1] if len(game[8]) else "") + "}\n")
         fail.close()
 
         #Save results to database

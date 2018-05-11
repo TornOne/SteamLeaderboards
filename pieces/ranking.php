@@ -18,7 +18,7 @@
 	$games = pg_query_params($conn, 'SELECT * FROM top_games LIMIT 25 OFFSET $1;', array($offset));
 	while ($row = pg_fetch_row($games)) {
 		$offset++;
-		//appid, name, rating, votes, score, platforms, release, price [, tags]
+		//appid, name, rating, votes, score, platforms, release, price, tags
 		?>
 		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/">
 			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_231x87.jpg"/>
@@ -27,11 +27,12 @@
 			<div class="game_title_tags">
 				<span class="game_title"><?=$row[1]?></span>
 				<span class="game_tags">
-					<span>Placeholder</span>
-					<span>Puzzle</span>
-					<span>Co-op</span>
-					<span>First Person</span>
-					<span>Placeholder 2</span>
+					<?php
+					$tags = explode(",", substr($row[8], 1, strlen($row[8]) - 2));
+					for ($i = 0, $tag_count = count($tags); $i < $tag_count; $i++) {
+						?>
+						<span><?=trim($tags[$i], "\"")?></span>
+					<?php } ?>
 				</span>
 			</div>
 
