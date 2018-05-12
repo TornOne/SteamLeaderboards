@@ -1,4 +1,4 @@
-addEventListener("load", checkLoggedIn);
+addEventListener("DOMContentLoaded", checkLoggedIn);
 
 function checkLoggedIn() {
 	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId") && localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
