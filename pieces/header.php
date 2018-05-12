@@ -14,7 +14,7 @@
 		</div>
 		
 		<div id="logout" hidden="hidden">
-			<img alt="" src="" title=""/>
+			<img alt="" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" title=""/>
 			<div class="dropdown">
 				<a href="javascript:refresh()">Refresh</a>
 				<a href="javascript:logout()">Logout</a>
