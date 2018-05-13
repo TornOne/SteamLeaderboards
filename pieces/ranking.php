@@ -57,17 +57,17 @@
 					echo number_format($row[10], 2), "$";
 				endif;
 				?></span>
-				<span class="vr_<?=$row[8] ? "icon" : "placeholder"?>"></span>
+				<span class="vr_<?=$row[8] == "t" ? "icon" : "placeholder"?>"></span>
 			</div>
 
 			<div class="game_release_platforms">
 				<span class="game_release"><?=date("j M, Y", strtotime($row[9]))?></span>
 				<span class="game_platforms">
-					<?php if ($row[5]): ?>
+					<?php if ($row[5] == "t"): ?>
 						<span class="win_icon"></span>
-					<?php endif; if ($row[6]): ?>
+					<?php endif; if ($row[6] == "t"): ?>
 						<span class="mac_icon"></span>
-					<?php endif; if ($row[7]): ?>
+					<?php endif; if ($row[7] == "t"): ?>
 						<span class="linux_icon"></span>
 					<?php endif; ?>
 				</span>
