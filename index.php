@@ -19,7 +19,10 @@ if ($next_refresh < 0) {
 <div class="main">
     <!--TODO:
 	Add a flex div and a tag selector to the right
-	Splitting platforms into boolean fields + adding a VR option?
+	Less contrast on price + free games a different color
+	Actually find which games support VR in the scraper
+	Blacklist tags + database list all tags
+	Parse Steam xhr/ajax responses for game search instead of the full page
 	-->
     <?php include 'pieces/ranking.php'; ?>
 </div>

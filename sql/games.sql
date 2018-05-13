@@ -1,4 +1,4 @@
-CREATE TABLE games (appid integer PRIMARY KEY, name text, rating real, votes integer, score real, platforms smallint, release date, price real, tags text[]);
+CREATE TABLE games (appid integer PRIMARY KEY, name text, rating real, votes integer, score real, windows boolean, mac boolean, linux boolean, vr boolean, release date, price real, tags text[]);
 
 CREATE VIEW top_games AS
 SELECT * FROM games ORDER BY score DESC;

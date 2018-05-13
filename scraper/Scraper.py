@@ -1,7 +1,7 @@
 import urllib, json, math, os, psycopg2, multiprocessing
 
-#appid, name, rating, votes, score, platforms, release, price, tags
-#  0  ,  1  ,   2   ,   3  ,   4  ,     5    ,    6   ,   7  ,  8
+#appid, name, rating, votes, score, windows, mac, linux, vr, release, price, tags
+#  0  ,  1  ,   2   ,   3  ,   4  ,    5   ,  6 ,   7  , 8 ,    9   ,  10  ,  11
 
 def listGames(pagenr):
     page = urllib.urlopen("http://store.steampowered.com/search/?sort_by=Released_DESC&category1=998&page=" + str(pagenr))
@@ -51,7 +51,7 @@ def listGames(pagenr):
         if price == 51: #Discounted
             price = game.find("</strike></span><br>") + 20
         price = game[price:]
-        price = price[:price.find("</div>")].strip()
+        price = price[:price.find("</div>")].strip().replace("-", "0")
         if "Free" in price:
             price = 0
         else:
@@ -65,27 +65,24 @@ def listGames(pagenr):
                 price = -1
 
         #Find platforms
-        platforms = 0 #Binary encoded, can add more if needed
-        if game.find('<span class="platform_img win"></span>') != -1:
-            platforms += 1
-        if game.find('<span class="platform_img mac"></span>') != -1:
-            platforms += 2
-        if game.find('<span class="platform_img linux"></span>') != -1:
-            platforms += 4
+        windows = game.find('<span class="platform_img win"></span>') != -1
+        mac = game.find('<span class="platform_img mac"></span>') != -1
+        linux = game.find('<span class="platform_img linux"></span>') != -1
+        vr = windows and not (mac or linux) #Placeholder
         
         #Find game name
         name = game[game.find('<span class="title">') + 20:]
         name = name[:name.find("</span>")]
 
-        games.append([appid, name, rating, votes, score, platforms, date, price, []])
+        games.append([appid, name, rating, votes, score, windows, mac, linux, vr, date, price, []])
         
     return games
 
 #Go through the page backwards, replacing any broken dates with the following game's date
 def fixDates(games):
     for i in xrange(len(games)):
-        if games[i][6] == -1:
-            games[i][6] = games[i - 1][6]
+        if games[i][9] == -1:
+            games[i][9] = games[i - 1][9]
 
 #Get all the games, but with imprecise scores
 def firstPass():
@@ -138,9 +135,9 @@ def getTags(game):
     tags = contents.split('<div class="app_tag">')
     #Only the top 75% of the tags, which is an approximation of what Steam does
     for tag in tags[1:int(0.75 * (len(tags) + 1))]:
-        game[8].append(tag[:tag.find("<")])
+        game[11].append(tag[:tag.find("<")])
     #Multiprocessing pools create new instances or something, so list values don't get updated and have to be assigned outside
-    return game[8]
+    return game[11]
 
 #Multiprocessing, 15 processes, should take about 20 minutes for the foreseeable future
 if __name__ == "__main__":
@@ -153,20 +150,35 @@ if __name__ == "__main__":
         for i in range(len(games)):
             for j in range(3):
                 games[i][j + 2] = newScores[i][j]
-            games[i][8] = tags[i]
+            games[i][11] = tags[i]
         games.sort(key = lambda game: game[4])
         games.reverse()
+
+        #Filter out blacklisted tags
+        blacklist = []
+        fail = open("Blacklist.txt", "r")
+        for line in fail:
+            blacklist.append(line[:-1])
+        fail.close()
+        for game in games:
+            i = 0
+            while i < len(game[11]):
+                if (game[11][i] in blacklist):
+                    del game[11][i]
+                else:
+                    i += 1
 
         #Save results to file
         fail = open("games.txt", "w")
         for game in games:
             fail.write(game[0] + "\t" + game[1] + "\t")
-            fail.write(str(game[2]) + "\t" + str(game[3]) + "\t" + str(game[4]) + "\t" + str(game[5]) + "\t")
-            fail.write(str(game[6] / 10000) + "-" + str((game[6] % 10000) / 100) + "-" + str(game[6] % 100) + "\t")
-            fail.write(str(game[7]) + "\t{")
-            for tag in game[8][:-1]:
+            for i in range(2, 9):
+                fail.write(str(game[i]) + "\t")
+            fail.write(str(game[9] / 10000) + "-" + str((game[9] % 10000) / 100) + "-" + str(game[9] % 100) + "\t")
+            fail.write(str(game[10]) + "\t{")
+            for tag in game[11][:-1]:
                 fail.write(tag + ", ")
-            fail.write((game[8][-1] if len(game[8]) else "") + "}\n")
+            fail.write((game[11][-1] if len(game[11]) else "") + "}\n")
         fail.close()
 
         #Save results to database

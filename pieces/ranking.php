@@ -18,7 +18,8 @@
 	$games = pg_query_params($conn, 'SELECT * FROM top_games LIMIT 25 OFFSET $1;', array($offset));
 	while ($row = pg_fetch_row($games)) {
 		$offset++;
-		//appid, name, rating, votes, score, platforms, release, price, tags
+		//appid, name, rating, votes, score, windows, mac, linux, vr, release, price, tags
+		//  0  ,  1  ,   2   ,   3  ,   4  ,    5   ,  6 ,   7  , 8 ,    9   ,  10  ,  11
 		?>
 		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/">
 			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_231x87.jpg"/>
@@ -34,39 +35,39 @@
 			endif;
 			?>"><?=$offset?>.</span>
 
-			<div class="game_title_tags_price">
+			<div class="game_title_tags">
 				<span class="game_title"><?=$row[1]?></span>
-				<span class="game_tags_price">
-					<span class="game_tags">
-						<?php
-						$tags = explode(",", substr($row[8], 1, strlen($row[8]) - 2));
-						for ($i = 0, $tag_count = count($tags); $i < $tag_count; $i++) {
-							?>
-							<span><?=trim($tags[$i], "\"")?></span>
-						<?php } ?>
-					</span>
-					<span class="game_price">
-						<span><?php
-						if ($row[7] == 0):
-							echo "Free";
-						elseif ($row[7] == -1):
-							echo "N/A";
-						else:
-							echo number_format($row[7], 2), "$";
-						endif;
-						?></span>
-					</span>
+				<span class="game_tags">
+					<?php
+					$tags = explode(",", substr($row[11], 1, strlen($row[11]) - 2));
+					for ($i = 0, $tag_count = count($tags); $i < min($tag_count, 5); $i++) {
+						?>
+						<span><?=trim($tags[$i], "\"")?></span>
+					<?php } ?>
 				</span>
 			</div>
 
+			<div class="game_price_vr">
+				<span class="game_price"><?php
+				if ($row[10] == 0):
+					echo "Free";
+				elseif ($row[10] == -1):
+					echo "N/A";
+				else:
+					echo number_format($row[10], 2), "$";
+				endif;
+				?></span>
+				<span class="vr_<?=$row[8] ? "icon" : "placeholder"?>"></span>
+			</div>
+
 			<div class="game_release_platforms">
-				<span class="game_release"><?=date("j M, Y", strtotime($row[6]))?></span>
+				<span class="game_release"><?=date("j M, Y", strtotime($row[9]))?></span>
 				<span class="game_platforms">
-					<?php if ($row[5] & 1): ?>
+					<?php if ($row[5]): ?>
 						<span class="win_icon"></span>
-					<?php endif; if ($row[5] & 2): ?>
+					<?php endif; if ($row[6]): ?>
 						<span class="mac_icon"></span>
-					<?php endif; if ($row[5] & 4): ?>
+					<?php endif; if ($row[7]): ?>
 						<span class="linux_icon"></span>
 					<?php endif; ?>
 				</span>
