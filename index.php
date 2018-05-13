@@ -18,10 +18,7 @@ if ($next_refresh < 0) {
 
 <div class="main">
     <!--TODO:
-    Change size on long ranking numbers / remove images when page is narrow
 	Add a flex div and a tag selector to the right
-	Add a price to the right edge of the name? (being the first to be hidden)
-	Tag information is too verbose / distracting?
 	Splitting platforms into boolean fields + adding a VR option?
 	-->
     <?php include 'pieces/ranking.php'; ?>

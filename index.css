@@ -5,7 +5,7 @@
 .game_listing {
 	position: relative;
 	margin: 0.3125em auto;
-	max-width: 56.25em;
+	max-width: 50em;
 	height: 2.8125em;
 	background-color: rgba(0, 0, 0, 0.2);
 	display: flex;
@@ -49,12 +49,27 @@
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAGXRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjIx8SBplQAAAGRJREFUeNpjYIACQUHB/yTgw////2fAhhnINBCnoRgGMuAAMA0CAgLdQHXXcRlKtIEwADSwHp+h5BqI01BKDIQZCtZH0EBCkQIzAKdDaG4gsWDgDCTk5YE3cDQMh3MYkotpZiAAHbQmtnYYBxkAAAAASUVORK5CYII=') no-repeat 0.35em/1em 1em rgba(211, 222, 234, 0.8);
 }
 
-.game_ranking {
+.game_ranking_big {
 	margin: auto 0.15em;
 	font-size: 2em;
 }
 
-.game_title_tags {
+.game_ranking_med {
+	margin: auto 0.15em;
+	font-size: 1.75em;
+}
+
+.game_ranking_small {
+	margin: auto 0.17em;
+	font-size: 1.5em;
+}
+
+.game_ranking_tiny {
+	margin: auto 0.2em;
+	font-size: 1.25em;
+}
+
+.game_title_tags_price {
 	margin: auto 0;
 	flex-grow: 1;
 	min-width: 0;
@@ -67,9 +82,12 @@
 	text-overflow: ellipsis;
 }
 
-.game_tags {
+.game_tags_price {
+	display: flex;
 	height: 1.25em;
-	display: block;
+}
+
+.game_tags {
 	overflow: hidden;
 }
 
@@ -80,6 +98,19 @@
 	padding: 0.1em 0.3em;
 	background-color: rgba(103, 193, 245, 0.2);
 	color: #67c1f5;
+}
+
+.game_price {
+	flex-shrink: 0;
+	width: 3em;
+	text-align: right;
+}
+
+.game_price span {
+	font-size: 0.7em;
+	padding: 0.1em 0.3em;
+	background-color: #000000;
+	border: 0.1em solid #4c6b22;
 }
 
 .game_release_platforms {
@@ -147,7 +178,6 @@
 
 .page_selector {
 	text-align: center;
-	min-width: 31.25em;
 	margin: 0.5em auto;
 }
 

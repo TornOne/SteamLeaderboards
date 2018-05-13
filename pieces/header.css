@@ -4,7 +4,7 @@ body {
 	background: #1B2838 url("/images/background.jpg") no-repeat fixed center top;
 	background-size: cover;
 	margin: 0;
-	min-width: 31.25em;
+	min-width: 30em;
 }
 
 a {

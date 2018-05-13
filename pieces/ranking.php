@@ -22,17 +22,40 @@
 		?>
 		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/">
 			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_231x87.jpg"/>
-			<span class="game_ranking"><?=$offset?>.</span>
+			<span class="<?php
+			if ($offset < 10):
+				echo "game_ranking_big";
+			elseif ($offset < 100):
+				echo "game_ranking_med";
+			elseif ($offset < 1000):
+				echo "game_ranking_small";
+			else:
+				echo "game_ranking_tiny";
+			endif;
+			?>"><?=$offset?>.</span>
 
-			<div class="game_title_tags">
+			<div class="game_title_tags_price">
 				<span class="game_title"><?=$row[1]?></span>
-				<span class="game_tags">
-					<?php
-					$tags = explode(",", substr($row[8], 1, strlen($row[8]) - 2));
-					for ($i = 0, $tag_count = count($tags); $i < $tag_count; $i++) {
-						?>
-						<span><?=trim($tags[$i], "\"")?></span>
-					<?php } ?>
+				<span class="game_tags_price">
+					<span class="game_tags">
+						<?php
+						$tags = explode(",", substr($row[8], 1, strlen($row[8]) - 2));
+						for ($i = 0, $tag_count = count($tags); $i < $tag_count; $i++) {
+							?>
+							<span><?=trim($tags[$i], "\"")?></span>
+						<?php } ?>
+					</span>
+					<span class="game_price">
+						<span><?php
+						if ($row[7] == 0):
+							echo "Free";
+						elseif ($row[7] == -1):
+							echo "N/A";
+						else:
+							echo number_format($row[7], 2), "$";
+						endif;
+						?></span>
+					</span>
 				</span>
 			</div>
 
