@@ -18,10 +18,7 @@ if ($next_refresh < 0) {
 
 <div class="main">
     <!--TODO:
-	Add a flex div and a tag selector to the right
-	Less contrast on price + free games a different color
-	Actually find which games support VR in the scraper
-	Parse Steam xhr/ajax responses for game search instead of the full page
+	Add a flex div and a search to the right
 	-->
     <?php include 'pieces/ranking.php'; ?>
 </div>

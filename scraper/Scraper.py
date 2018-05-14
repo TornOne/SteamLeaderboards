@@ -68,7 +68,7 @@ def listGames(pagenr):
         windows = game.find('<span class="platform_img win"></span>') != -1
         mac = game.find('<span class="platform_img mac"></span>') != -1
         linux = game.find('<span class="platform_img linux"></span>') != -1
-        vr = windows and not (mac or linux) #Placeholder
+        vr = game.find('class="platform_img htcvive') != -1 or game.find('class="platform_img oculusrift"') != -1 or game.find('class="platform_img windowsmr"') != -1
         
         #Find game name
         name = game[game.find('<span class="title">') + 20:]
@@ -118,7 +118,7 @@ def firstPass():
     return allGames
 
 def getPreciseScore(game):
-    page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[7] <= 0 else "steam"))
+    page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[10] <= 0 else "steam"))
     contents = json.loads(page.read())
     game[3] = contents["query_summary"]["total_reviews"]
     if game[3] != 0:

@@ -105,11 +105,14 @@
 	flex-shrink: 0;
 }
 
-.game_price {
+.game_price, .game_price_na {
 	font-size: 0.7em;
 	padding: 0.1em 0.3em;
-	background-color: #000000;
 	border: 0.1em solid #4c6b22;
+}
+
+.game_price_na {
+	border-color: #911717;
 }
 
 .vr_placeholder, .vr_icon {

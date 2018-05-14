@@ -48,15 +48,13 @@
 			</div>
 
 			<div class="game_price_vr">
-				<span class="game_price"><?php
-				if ($row[10] == 0):
-					echo "Free";
-				elseif ($row[10] == -1):
-					echo "N/A";
-				else:
-					echo number_format($row[10], 2), "$";
-				endif;
-				?></span>
+				<?php if ($row[10] == 0): ?>
+					<span class="game_price">Free</span>
+				<?php elseif ($row[10] == -1): ?>
+					<span class="game_price_na">N/A</span>
+				<?php else: ?>
+					<span class="game_price"><?=number_format($row[10], 2), "$"?></span>
+				<?php endif; ?>
 				<span class="vr_<?=$row[8] == "t" ? "icon" : "placeholder"?>"></span>
 			</div>
 
