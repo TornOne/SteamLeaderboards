@@ -84,7 +84,7 @@
 
 .game_tags {
 	display: block;
-	width: 12.5em;
+	max-width: 12.5em;
 	height: 1.25em;
 	overflow: hidden;
 }
