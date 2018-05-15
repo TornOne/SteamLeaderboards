@@ -156,7 +156,7 @@ if __name__ == "__main__":
 
         #Filter out blacklisted tags
         blacklist = []
-        fail = open("Blacklist.txt", "r")
+        fail = open("scraper/Blacklist.txt", "r")
         for line in fail:
             blacklist.append(line[:-1])
         fail.close()
