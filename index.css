@@ -1,5 +1,192 @@
+.main {
+	display: flex;
+	justify-content: center;
+}
+
+.main {
+	flex-direction: row-reverse; /*column*/
+}
+
+#search {
+	flex-shrink: 0;
+	width: 14.6875em;
+	border: 0.1em solid rgba(255, 255, 255, 0.1);
+	margin: 0.3125em 0 auto 0.3125em;
+}
+
+.search_header {
+	background-color: rgba(0, 0, 0, 0.4);
+	padding: 0.3em 0.5em;
+	margin-bottom: 1em;
+}
+
+.search_block_header {
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 0.3em 0.5em;
+	margin: 0 0.5em;
+}
+
+.search_block {
+	border: 0.1em solid rgba(255, 255, 255, 0.1);
+	padding: 0 0.5em 0.3em;
+	margin: 0 0.5em 1em;
+}
+
+.search_block div, .search_block label, .date_text {
+	font-size: 0.875em;
+}
+
+#name_field {
+	background-color: rgba(103, 193, 245, 0.2);
+	border: 0.1em solid #000000;
+	border-radius: 0.3em;
+	padding: 0.3em;
+	color: #ffffff;
+	width: 65%;
+}
+
+#search_button, #price_0_button, #price_10_button, #price_20_button {
+	background-color: rgba(103, 193, 245, 0.2);
+	border: 0;
+	border-radius: 0.3em;
+	color: #67c1f5;
+	height: 1.8em;
+	width: 27.5%;
+	cursor: pointer;
+}
+
+#search_button:hover, #price_0_button:hover, #price_10_button:hover, #price_20_button:hover {
+	background: linear-gradient(135deg, #67c1f5 0%, #417a9b 100%);
+	color: #ffffff;
+}
+
+.search_tag {
+	padding: 0.3em 0.5em;
+	margin: 0.3em 0;
+	cursor: pointer;
+	position: relative;
+}
+
+.search_tag::before {
+	content: "";
+	background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI3Ljk2NSAyNy45NjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI3Ljk2NSAyNy45NjU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPjxnPjxnIGlkPSJjMTQyX3giPjxwYXRoIGQ9Ik0xMy45OCwwQzYuMjU5LDAsMCw2LjI2MSwwLDEzLjk4M2MwLDcuNzIxLDYuMjU5LDEzLjk4MiwxMy45OCwxMy45ODJjNy43MjUsMCwxMy45ODUtNi4yNjIsMTMuOTg1LTEzLjk4MiAgICBDMjcuOTY1LDYuMjYxLDIxLjcwNSwwLDEzLjk4LDB6IE0xOS45OTIsMTcuNzY5bC0yLjIyNywyLjIyNGMwLDAtMy41MjMtMy43OC0zLjc4Ni0zLjc4Yy0wLjI1OSwwLTMuNzgzLDMuNzgtMy43ODMsMy43OCAgICBsLTIuMjI4LTIuMjI0YzAsMCwzLjc4NC0zLjQ3MiwzLjc4NC0zLjc4MWMwLTAuMzE0LTMuNzg0LTMuNzg3LTMuNzg0LTMuNzg3bDIuMjI4LTIuMjI5YzAsMCwzLjU1MywzLjc4MiwzLjc4MywzLjc4MiAgICBjMC4yMzIsMCwzLjc4Ni0zLjc4MiwzLjc4Ni0zLjc4MmwyLjIyNywyLjIyOWMwLDAtMy43ODUsMy41MjMtMy43ODUsMy43ODdDMTYuMjA3LDE0LjIzOSwxOS45OTIsMTcuNzY5LDE5Ljk5MiwxNy43Njl6IiBmaWxsPSIjRkZGRkZGIi8+PC9nPjxnIGlkPSJDYXBhXzFfMTA0XyI+PC9nPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48L3N2Zz4=");
+	background-size: cover;
+	opacity: 0.3;
+	width: 1em;
+	height: 1em;
+	position: absolute;
+	right: 0.375em;
+	top: 0.375em;
+}
+
+.search_tag:hover, .checkbox:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tag_field_class, #price_field {
+	margin-top: 0.5em;
+}
+
+#tag_field, #price_field, #from_day, #from_month, #from_year, #to_day, #to_month, #to_year {
+	background-color: rgba(0, 0, 0, 0.2);
+	border: 0.1em solid #000000;
+	border-radius: 0.3em;
+	padding: 0.3em;
+	color: #ffffff;
+	width: 95%;
+}
+
+#price_field {
+	width: 27.5%;
+	text-align: right;
+}
+
+#price_0_button, #price_10_button, #price_20_button {
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 20%;
+}
+
+.date_text {
+	display: inline-block;
+	text-align: right;
+	width: 20%;
+}
+
+#from_day, #from_month, #from_year, #to_day, #to_month, #to_year {
+	padding: 0.2em;
+	width: 17.5%;
+	text-align: center;
+}
+
+#from_day, #from_month, #from_year {
+	margin: 0.5em 0 0.2em;
+}
+
+#to_day, #to_month, #to_year {
+	margin: 0.2em 0 0.5em;
+}
+
+#date_preset {
+	background-color: rgba(0, 0, 0, 0.2);
+	color: #c6d4df;
+	border: 0.1em solid #000000;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	width: 68%;
+}
+
+option {
+	background-color: #18364e;
+}
+
+input[type=checkbox] {
+	opacity: 0;
+	cursor: pointer;
+	width: 1.5em;
+}
+
+.checkbox {
+	margin: 0.3em 0;
+	display: block;
+	position: relative;
+	cursor: pointer;
+	width: 95%;
+	line-height: 2em;
+}
+
+.checkbox::before {
+	position: absolute;
+	top: 0.4em;
+	left: 0.4em;
+	height: 1em;
+	width: 1em;
+	background-color: rgba(0, 0, 0, 0.2);
+	border: 0.1em solid #c6d4df;
+	border-radius: 0.3em;
+	content: "";
+	line-height: 1em;
+}
+
+.check_mark {
+	position: absolute;
+	top: 0.45em;
+	left: 0.75em;
+	height: 0.6em;
+	width: 0.25em;
+	border: solid #c6d4df;
+	border-width: 0 0.25em 0.25em 0;
+	transform: rotate(45deg);
+	display: none;
+}
+
+input:checked ~ .check_mark {
+	display: block;
+}
+
+/* ------------------------ */
+
 #ranking {
-	
+	/*flex-shrink: 0;*/
 }
 
 .game_listing {

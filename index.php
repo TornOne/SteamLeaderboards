@@ -17,9 +17,69 @@ if ($next_refresh < 0) {
 <?php include 'pieces/header.php'; ?>
 
 <div class="main">
-    <!--TODO:
-	Add a flex div and a search to the right
-	-->
+	<div id="search">
+		<div class="search_header">
+			<input id="name_field" placeholder="Search for a game"/>
+			<input id="search_button" type="button" value="Search"/>
+		</div>
+
+		<div class="search_block_header">Filter by tags</div>
+		<div class="search_block">
+			<div class="search_tag">Psychological Horror</div>
+			<div class="search_tag">Resource Management</div>
+			<div class="tag_field_class"><input id="tag_field" placeholder="Search for tags"/></div>
+		</div>
+
+		<div class="search_block_header">Filter by price</div>
+		<div class="search_block">
+			<input id="price_field" type="text" placeholder="Max" pattern="\d{1,4}([\.,]\d{1,2})?"/>
+			<input id="price_0_button" type="button" value="Free"/>
+			<input id="price_10_button" type="button" value="10$"/>
+			<input id="price_20_button" type="button" value="20$"/>
+		</div>
+
+		<div class="search_block_header">Filter by release date</div>
+		<div class="search_block">
+			<span class="date_text">From:</span>
+			<input id="from_day" type="text" placeholder="dd" pattern="([0-2]?[1-9])|([1-3]0)|31"/>
+			<input id="from_month" type="text" placeholder="mm" pattern="(0?[1-9])|(1[0-2])"/>
+			<input id="from_year" type="text" placeholder="yyyy" pattern="\d{1,4}"/>
+			<br/>
+			<span class="date_text">To:</span>
+			<input id="to_day" type="text" placeholder="dd" pattern="([0-2]?[1-9])|([1-3]0)|31"/>
+			<input id="to_month" type="text" placeholder="mm" pattern="(0?[1-9])|(1[0-2])"/>
+			<input id="to_year" type="text" placeholder="yyyy" pattern="\d{1,4}"/>
+			<span class="date_text"></span>
+			<select id="date_preset">
+				<option value="placeholder">Select a preset</option>
+				<option value="week">Past week</option>
+				<option value="week2">A week old</option>
+				<option value="month">Past month</option>
+				<option value="season">Past season</option>
+				<option value="year">Past year</option>
+			</select>
+		</div>
+
+		<div class="search_block_header">Filter by platform</div>
+		<div class="search_block">
+			<label class="checkbox">
+				<input id="vr_checkbox" type="checkbox"/>VR
+				<span class="check_mark"></span>
+			</label>
+			<label class="checkbox">
+				<input id="windows_checkbox" type="checkbox"/>Windows
+				<span class="check_mark"></span>
+			</label>
+			<label class="checkbox">
+				<input id="mac_checkbox" type="checkbox"/>Mac
+				<span class="check_mark"></span>
+			</label>
+			<label class="checkbox">
+				<input id="linux_checkbox" type="checkbox"/>Linux
+				<span class="check_mark"></span>
+			</label>
+		</div>
+	</div>
     <?php include 'pieces/ranking.php'; ?>
 </div>
 

@@ -23,6 +23,6 @@
 	</div>
 	
 	<div class="title">
-		<a href="/index.php">Steam Leaderboards</a>
+		<a href="/">Steam Leaderboards</a>
 	</div>
 </div>
