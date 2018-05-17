@@ -20,29 +20,36 @@
 	if (isset($_GET["date"])) {
 		$date_preset = $_GET["date"];
 		if ($date_preset === "week") {
-			$_GET["from"] = date("Y-m-d", time() - 604800);
-			$_GET["to"] = date("Y-m-d");
+			$from = date("Y-m-d", time() - 604800);
+			$to = date("Y-m-d");
 		} else if ($date_preset === "week2") {
-			$_GET["from"] = date("Y-m-d", time() - 1209600);
-			$_GET["to"] = date("Y-m-d", time() - 604800);
+			$from = date("Y-m-d", time() - 1209600);
+			$to = date("Y-m-d", time() - 604800);
 		} else if ($date_preset === "month") {
-			$_GET["from"] = date("Y-m-d", time() - 2592000);
-			$_GET["to"] = date("Y-m-d");
+			$from = date("Y-m-d", time() - 2592000);
+			$to = date("Y-m-d");
 		} else if ($date_preset === "season") {
-			$_GET["from"] = date("Y-m-d", time() - 7862400);
-			$_GET["to"] = date("Y-m-d");
+			$from = date("Y-m-d", time() - 7862400);
+			$to = date("Y-m-d");
 		} else if ($date_preset === "year") {
-			$_GET["from"] = date("Y-m-d", time() - 31536000);
-			$_GET["to"] = date("Y-m-d");
+			$from = date("Y-m-d", time() - 31536000);
+			$to = date("Y-m-d");
 		}
-	}
-	if (isset($_GET["from"])) {
-		$where_fields[] = "release >=";
-		$where_params[] = $_GET["from"];
-	}
-	if (isset($_GET["to"])) {
-		$where_fields[] = "release <=";
-		$where_params[] = $_GET["to"];
+		if (isset($from)) {
+			$where_fields[] = "release >=";
+			$where_fields[] = "release <=";
+			$where_params[] = $from;
+			$where_params[] = $to;
+		}
+	} else {
+		if (isset($_GET["from"])) {
+			$where_fields[] = "release >=";
+			$where_params[] = $_GET["from"];
+		}
+		if (isset($_GET["to"])) {
+			$where_fields[] = "release <=";
+			$where_params[] = $_GET["to"];
+		}
 	}
 	//Platforms
 	if (isset($_GET["vr"])) {
@@ -159,9 +166,14 @@
 		</a>
 	<?php } ?>
 
+	<?php
+	unset($_GET["page"]);
+	$query = http_build_query($_GET);
+	?>
+
 	<div class="page_selector">
 		<?php if ($pagenr != 1) { ?>
-			<a class="page_button" href="/?page=<?=$pagenr - 1?>" onclick="parseLoadPage(this); return false;"><</a><a href="/?page=1" onclick="parseLoadPage(this); return false;">1</a>
+			<a class="page_button" href="/?<?=$query?>&page=<?=$pagenr - 1?>" onclick="parseLoadPage(this); return false;"><</a><a href="/?<?=$query?>&page=1" onclick="parseLoadPage(this); return false;">1</a>
 		<?php }
 
 		if ($pagenr > 4) {
@@ -169,11 +181,11 @@
 		}
 
 		for ($i = max(2, $pagenr - 2); $i < $pagenr; $i++) { ?>
-			<a href="/?page=<?=$i?>" onclick="parseLoadPage(this); return false;"><?=$i?></a>
+			<a href="/?<?=$query?>&page=<?=$i?>" onclick="parseLoadPage(this); return false;"><?=$i?></a>
 		<?php }
 		echo "<span>$pagenr</span>";
 		for ($i = $pagenr + 1; $i < min($pagenr + 3, $page_count); $i++) { ?>
-			<a href="/?page=<?=$i?>" onclick="parseLoadPage(this); return false;"><?=$i?></a>
+			<a href="/?<?=$query?>&page=<?=$i?>" onclick="parseLoadPage(this); return false;"><?=$i?></a>
 		<?php }
 
 		if ($pagenr < $page_count - 3) {
@@ -181,7 +193,7 @@
 		}
 
 		if ($pagenr != $page_count) { ?>
-			<a href="/?page=<?=$page_count?>" onclick="parseLoadPage(this); return false;"><?=$page_count?></a><a class="page_button" href="/?page=<?=$pagenr + 1?>" onclick="parseLoadPage(this); return false;">></a>
+			<a href="/?<?=$query?>&page=<?=$page_count?>" onclick="parseLoadPage(this); return false;"><?=$page_count?></a><a class="page_button" href="/?<?=$query?>&page=<?=$pagenr + 1?>" onclick="parseLoadPage(this); return false;">></a>
 		<?php } ?>
 	</div>
 </div>
