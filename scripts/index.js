@@ -239,18 +239,12 @@ function fillSearchFields() {
 
 	var from = params.get("from");
 	if (from) {
-		from = from.split("-");
-		document.getElementById("from_year").value = from[0];
-		document.getElementById("from_month").value = from[1];
-		document.getElementById("from_day").value = from[2];
+		setFrom(from);
 	}
 
 	var to = params.get("to");
 	if (to) {
-		to = to.split("-");
-		document.getElementById("to_year").value = to[0];
-		document.getElementById("to_month").value = to[1];
-		document.getElementById("to_day").value = to[2];
+		setTo(to);
 	}
 
 	var date = params.get("date");
@@ -282,6 +276,20 @@ function remove(element) {
 
 function setPrice(price) {
 	document.getElementById("price_field").value = price;
+}
+
+function setFrom(date) {
+	date = date.split("-");
+	document.getElementById("from_year").value = date[0];
+	document.getElementById("from_month").value = date[1];
+	document.getElementById("from_day").value = date[2];
+}
+
+function setTo(date) {
+	date = date.split("-");
+	document.getElementById("to_year").value = date[0];
+	document.getElementById("to_month").value = date[1];
+	document.getElementById("to_day").value = date[2];
 }
 
 function setDatePreset(bool) {

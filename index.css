@@ -1,10 +1,5 @@
 .main {
-	display: flex;
-	justify-content: center;
-}
 
-.main {
-	flex-direction: row-reverse; /*column*/
 }
 
 #search {
@@ -30,6 +25,7 @@
 	border: 0.1em solid rgba(255, 255, 255, 0.1);
 	padding: 0 0.5em 0.3em;
 	margin: 0 0.5em 1em;
+	position: relative;
 }
 
 .search_block label {
@@ -68,13 +64,16 @@
 	position: relative;
 }
 
-.search_tag::before {
-	content: "";
+.search_tag::before, #price_clear_button, #from_clear_button, #to_clear_button {
 	background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI3Ljk2NSAyNy45NjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI3Ljk2NSAyNy45NjU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPjxnPjxnIGlkPSJjMTQyX3giPjxwYXRoIGQ9Ik0xMy45OCwwQzYuMjU5LDAsMCw2LjI2MSwwLDEzLjk4M2MwLDcuNzIxLDYuMjU5LDEzLjk4MiwxMy45OCwxMy45ODJjNy43MjUsMCwxMy45ODUtNi4yNjIsMTMuOTg1LTEzLjk4MiAgICBDMjcuOTY1LDYuMjYxLDIxLjcwNSwwLDEzLjk4LDB6IE0xOS45OTIsMTcuNzY5bC0yLjIyNywyLjIyNGMwLDAtMy41MjMtMy43OC0zLjc4Ni0zLjc4Yy0wLjI1OSwwLTMuNzgzLDMuNzgtMy43ODMsMy43OCAgICBsLTIuMjI4LTIuMjI0YzAsMCwzLjc4NC0zLjQ3MiwzLjc4NC0zLjc4MWMwLTAuMzE0LTMuNzg0LTMuNzg3LTMuNzg0LTMuNzg3bDIuMjI4LTIuMjI5YzAsMCwzLjU1MywzLjc4MiwzLjc4MywzLjc4MiAgICBjMC4yMzIsMCwzLjc4Ni0zLjc4MiwzLjc4Ni0zLjc4MmwyLjIyNywyLjIyOWMwLDAtMy43ODUsMy41MjMtMy43ODUsMy43ODdDMTYuMjA3LDE0LjIzOSwxOS45OTIsMTcuNzY5LDE5Ljk5MiwxNy43Njl6IiBmaWxsPSIjRkZGRkZGIi8+PC9nPjxnIGlkPSJDYXBhXzFfMTA0XyI+PC9nPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48L3N2Zz4=");
 	background-size: cover;
 	opacity: 0.3;
 	width: 1em;
 	height: 1em;
+}
+
+.search_tag::before {
+	content: "";
 	position: absolute;
 	right: 0.375em;
 	top: 0.375em;
@@ -98,8 +97,19 @@
 }
 
 #price_field {
-	width: 27.5%;
+	width: 25%;
 	text-align: right;
+}
+
+#price_clear_button {
+	position: absolute;
+	top: 0.8em;
+	left: 0.8em;
+	font-size: 1em;
+	border: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
 }
 
 #price_0_button, #price_10_button, #price_20_button {
@@ -111,7 +121,7 @@
 	font-size: 0.875em;
 	display: inline-block;
 	text-align: right;
-	width: 20%;
+	width: 17.5%;
 }
 
 #from_day, #from_month, #from_year, #to_day, #to_month, #to_year {
@@ -126,6 +136,15 @@
 
 #to_day, #to_month, #to_year {
 	margin: 0.2em 0 0.5em;
+}
+
+#from_clear_button, #to_clear_button {
+	font-size: 1em;
+	line-height: 1em;
+	border: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
 }
 
 #date_preset {

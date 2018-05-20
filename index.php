@@ -17,6 +17,8 @@ if ($next_refresh < 0) {
 <?php include 'pieces/header.php'; ?>
 
 <div class="main">
+	<?php include 'pieces/ranking.php'; ?>
+
 	<div id="search">
 		<div class="search_header">
 			<input id="name_field" placeholder="Search for a game"/>
@@ -35,9 +37,10 @@ if ($next_refresh < 0) {
 			</datalist>
 		</div>
 
-		<div class="search_block_header">Filter by price</div>
+		<div class="search_block_header">Filter by max price</div>
 		<div class="search_block">
-			<input id="price_field" type="text" placeholder="Max" pattern="\d{1,4}([\.,]\d{1,2})?"/>
+			<input id="price_field" type="text" placeholder="Max" pattern="\d{1,4}([\.,]\d{1,2})?">
+			<input id="price_clear_button" type="button" onclick="setPrice('')"/>
 			<input id="price_0_button" type="button" value="Free" onclick="setPrice(0)"/>
 			<input id="price_10_button" type="button" value="10$" onclick="setPrice(10)"/>
 			<input id="price_20_button" type="button" value="20$" onclick="setPrice(20)"/>
@@ -48,12 +51,14 @@ if ($next_refresh < 0) {
 			<span class="date_text">From:</span>
 			<input id="from_day" type="text" placeholder="dd" pattern="([0-2]?[1-9])|([1-3]0)|31" onchange="setDatePreset(false);"/>
 			<input id="from_month" type="text" placeholder="mm" pattern="(0?[1-9])|(1[0-2])" onchange="setDatePreset(false);"/>
-			<input id="from_year" type="text" placeholder="yyyy" pattern="\d{1,4}" onchange="setDatePreset(false);"/>
+			<input id="from_year" type="text" placeholder="yyyy" pattern="\d{4}" onchange="setDatePreset(false);"/>
+			<input id="from_clear_button" type="button" onclick="setFrom('--')"/>
 			<br/>
 			<span class="date_text">To:</span>
 			<input id="to_day" type="text" placeholder="dd" pattern="([0-2]?[1-9])|([1-3]0)|31" onchange="setDatePreset(false);"/>
 			<input id="to_month" type="text" placeholder="mm" pattern="(0?[1-9])|(1[0-2])" onchange="setDatePreset(false);"/>
-			<input id="to_year" type="text" placeholder="yyyy" pattern="\d{1,4}" onchange="setDatePreset(false);"  />
+			<input id="to_year" type="text" placeholder="yyyy" pattern="\d{4}" onchange="setDatePreset(false);"/>
+			<input id="to_clear_button" type="button" onclick="setTo('--')"/>
 			<span class="date_text"></span>
 			<select id="date_preset" onchange="setDatePreset(true);">
 				<option value="placeholder">Select a preset</option>
@@ -85,7 +90,6 @@ if ($next_refresh < 0) {
 			</label>
 		</div>
 	</div>
-    <?php include 'pieces/ranking.php'; ?>
 </div>
 
 <?php include 'pieces/footer.php'; ?>
