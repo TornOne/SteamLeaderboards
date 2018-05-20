@@ -19,7 +19,7 @@ if ($next_refresh < 0) {
 <div class="main">
 	<?php include 'pieces/ranking.php'; ?>
 
-	<div id="search_toggle" onclick="toggleSearchVisibility()"> </div>
+	<div id="search_toggle" onclick="toggleSearchVisibility()">&nbsp;</div>
 
 	<div id="search" hidden="hidden">
 		<div class="search_header">
