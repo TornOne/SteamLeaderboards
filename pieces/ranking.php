@@ -133,9 +133,9 @@
 			</div>
 
 			<div class="game_price_vr">
-				<?php if ($row[10] == 0): ?>
+				<?php if ($row[10] === 0): ?>
 					<span class="game_price">Free</span>
-				<?php elseif ($row[10] == -1): ?>
+				<?php elseif ($row[10] === null): ?>
 					<span class="game_price_na">N/A</span>
 				<?php else: ?>
 					<span class="game_price"><?=number_format($row[10], 2), "$"?></span>

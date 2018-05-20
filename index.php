@@ -26,7 +26,13 @@ if ($next_refresh < 0) {
 		<div class="search_block_header">Filter by tags</div>
 		<div class="search_block">
 			<div id="tags"></div>
-			<div class="tag_field_class"><input id="tag_field" placeholder="Search for tags"/></div>
+			<div class="tag_field_class"><input id="tag_field" placeholder="Search for tags" list="tag_list"/></div>
+			<datalist id="tag_list">
+				<?php
+				$tag_string = pg_fetch_result(pg_query($conn, "SELECT value FROM config_strings WHERE key = 'tags';"), 0, 0);
+				$all_tags = explode(",", $tag_string);
+				foreach ($all_tags as $tag) { ?><option value="<?=$tag?>"></option><?php } ?>
+			</datalist>
 		</div>
 
 		<div class="search_block_header">Filter by price</div>

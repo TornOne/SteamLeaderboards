@@ -179,10 +179,10 @@ if __name__ == "__main__":
             allTags.append([tagCounts[tag], tag])
         allTags.sort()
         allTags.reverse()
-        tagString = "'{"
+        tagString = ""
         for tag in allTags:
             tagString += tag[1].replace("'", "''").replace("&amp;", "&") + ","
-        tagString = tagString[:-1] + "}'"
+        tagString = tagString[:-1]
 
         #Save results to file
         fail = open("games.txt", "w")
@@ -203,7 +203,7 @@ if __name__ == "__main__":
             with conn.cursor() as curs:
                 curs.execute("DELETE FROM games;")
                 curs.copy_from(open("games.txt", "r"), "games")
-                curs.execute("UPDATE tags SET tags = " + tagString + " WHERE key = 'tags';")
+                curs.execute("UPDATE config_strings SET value = '" + tagString + "' WHERE key = 'tags';")
                 curs.execute("SELECT update_completed_refresh_time();")
         conn.close()
     except:

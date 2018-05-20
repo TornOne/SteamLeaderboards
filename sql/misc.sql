@@ -15,3 +15,7 @@ $$ LANGUAGE SQL;
 CREATE OR REPLACE FUNCTION update_failed_refresh_time() RETURNS void AS $$
 UPDATE config_dates SET value = 'now' WHERE key = 'failed_refresh_time';
 $$ LANGUAGE SQL;
+
+
+
+CREATE TABLE config_strings (key text PRIMARY KEY, value text);
