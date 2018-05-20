@@ -140,6 +140,10 @@ addEventListener("popstate", function() {
 var useDatePreset = false;
 
 function search() {
+	if (!(isSearchBottom || isSearchHidden)) {
+		toggleSearchVisibility();
+	}
+
 	var query = {};
 
 	document.getElementById("name_field"); //TODO
@@ -154,9 +158,7 @@ function search() {
 	}
 
 	var price = document.getElementById("price_field").value;
-	if (price) {
-		//TODO var regEx = new RegExp("\\d{1,4}([\\.,]\\d{1,2})?");
-		//regEx.
+	if (price && /^\d{1,4}([\.,]\d{1,2})?$/.test(price)) {
 		query["price"] = price;
 	}
 
@@ -165,11 +167,11 @@ function search() {
 		query["date"] = datePresetOptions[datePresetOptions.selectedIndex].value;
 	} else {
 		var fromYear = document.getElementById("from_year").value;
-		if (fromYear) {
+		if (fromYear && /^\d{4}$/.test(fromYear)) {
 			var fromMonth = document.getElementById("from_month").value;
-			if (fromMonth) {
+			if (fromMonth && /^(0?[1-9]|1[0-2])$/.test(fromMonth)) {
 				var fromDay = document.getElementById("from_day").value;
-				if (!fromDay) {
+				if (!(fromDay && /^([0-2]?[1-9]|[1-3]0|31)$/.test(fromDay))) {
 					fromDay = "01";
 				}
 			} else {
@@ -180,11 +182,11 @@ function search() {
 		}
 
 		var toYear = document.getElementById("to_year").value;
-		if (toYear) {
+		if (toYear && /^\d{4}$/.test(toYear)) {
 			var toMonth = document.getElementById("to_month").value;
-			if (toMonth) {
+			if (toMonth && /^(0?[1-9]|1[0-2])$/.test(toMonth)) {
 				var toDay = document.getElementById("to_day").value;
-				if (!toDay) {
+				if (!(toDay && /^([0-2]?[1-9]|[1-3]0|31)$/.test(toDay))) {
 					toDay = getMonthDays(toMonth, toYear);
 				}
 			} else {
@@ -309,5 +311,40 @@ function getMonthDays(m, y) {
 		}
 	} else {
 		return 30;
+	}
+}
+
+//Search box visibility on window resize
+addEventListener("DOMContentLoaded", updateSearchVisibility);
+addEventListener("resize", updateSearchVisibility);
+
+var isSearchBottom = false;
+var isSearchHidden = true;
+
+function updateSearchVisibility() {
+	if (window.innerWidth / parseFloat(getComputedStyle(document.body).fontSize) <= 55) {
+		if (isSearchBottom) {
+			isSearchBottom = false;
+			if (isSearchHidden) {
+				document.getElementById("search").setAttribute("hidden", "hidden");
+			}
+		}
+	} else {
+		if (!isSearchBottom) {
+			isSearchBottom = true;
+			if (isSearchHidden) {
+				document.getElementById("search").removeAttribute("hidden");
+			}
+		}
+	}
+}
+
+function toggleSearchVisibility() {
+	if (isSearchHidden) {
+		isSearchHidden = false;
+		document.getElementById("search").removeAttribute("hidden");
+	} else {
+		isSearchHidden = true;
+		document.getElementById("search").setAttribute("hidden", "hidden");
 	}
 }

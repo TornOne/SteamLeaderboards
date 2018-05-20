@@ -80,17 +80,15 @@
 	}
 
 	$page_count = ceil(pg_fetch_result(pg_query_params($conn, "SELECT COUNT(*) FROM games" . $where_query . ";", $where_params), 0, 0) / 25);
+	if ($page_count == 0) { ?>
+		<div class="game_listing">
+			<div class="empty_listing">No games found</div>
+		</div>
+		<?php $page_count = 1;
+	}
 	if (isset($_GET["page"]) && $_GET["page"] > 0) {
 		$pagenr = $_GET["page"];
 		if ($pagenr > $page_count) {
-			if ($page_count == 0) {
-				?>
-				<div class="game_listing">
-					<div class="game_title_tags">No games found</div>
-				</div>
-				<?php
-				$page_count = 1;
-			}
 			$pagenr = $page_count;
 		}
 	} else {
