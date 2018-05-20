@@ -1,8 +1,6 @@
 <div class="footer">
 	<a href="/about.php">About this page</a>
 	<br/>
-    Page generated in <?=number_format(microtime(true) - $load_start_time, 3)?>s
-	<br/>
 	<?php
 	function secondsToHuman($ss) {
 		$s = $ss % 60;
@@ -17,6 +15,8 @@
 	Last update completed <?=secondsToHuman($last_refresh)?> ago
 	<br/>
 	Next update in <?=secondsToHuman($next_refresh)?>
+	<br/>
+	Page generated in <?=number_format(microtime(true) - $load_start_time, 3)?>s
 </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 addEventListener("DOMContentLoaded", checkLoggedIn);
+addEventListener("DOMContentLoaded", fillSearchFields);
 
 function checkLoggedIn() {
 	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId") && localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
@@ -46,7 +47,7 @@ function login() {
 		localStorage.setItem("steamGames", games);
 
 		var wishlist = userdata["wishlist"];
-		for (var i = 0; i < wishlist.length; i++) {
+		for (i = 0; i < wishlist.length; i++) {
 			wishlist[i] = wishlist[i]["appid"];
 		}
 		localStorage.setItem("steamWishlist", wishlist);
@@ -133,3 +134,172 @@ function parseLoadPage(elem) {
 addEventListener("popstate", function() {
 	loadPage(location.search.substr(1), false);
 });
+
+//Search stuff
+
+var useDatePreset = false;
+
+function search() {
+	var query = {};
+
+	document.getElementById("name_field"); //TODO
+
+	var tagElements = document.getElementsByClassName("search_tag");
+	var tags = [];
+	if (tagElements.length > 0) {
+		for (var i = 0; i < tagElements.length; i++) {
+			tags[i] = tagElements[i].innerHTML;
+		}
+		query["tags"] = tags.join();
+	}
+
+	var price = document.getElementById("price_field").value;
+	if (price) {
+		//TODO var regEx = new RegExp("\\d{1,4}([\\.,]\\d{1,2})?");
+		//regEx.
+		query["price"] = price;
+	}
+
+	if (useDatePreset) {
+		var datePresetOptions = document.getElementById("date_preset");
+		query["date"] = datePresetOptions[datePresetOptions.selectedIndex].value;
+	} else {
+		var fromYear = document.getElementById("from_year").value;
+		if (fromYear) {
+			var fromMonth = document.getElementById("from_month").value;
+			if (fromMonth) {
+				var fromDay = document.getElementById("from_day").value;
+				if (!fromDay) {
+					fromDay = "01";
+				}
+			} else {
+				fromMonth = "01";
+				fromDay = "01";
+			}
+			query["from"] = fromYear + "-" + fromMonth + "-" + fromDay;
+		}
+
+		var toYear = document.getElementById("to_year").value;
+		if (toYear) {
+			var toMonth = document.getElementById("to_month").value;
+			if (toMonth) {
+				var toDay = document.getElementById("to_day").value;
+				if (!toDay) {
+					toDay = getMonthDays(toMonth, toYear);
+				}
+			} else {
+				toMonth = "12";
+				toDay = "31";
+			}
+			query["to"] = toYear + "-" + toMonth + "-" + toDay;
+		}
+	}
+
+	if (document.getElementById("vr_checkbox").checked) {
+		query["vr"] = "t";
+	}
+	if (document.getElementById("windows_checkbox").checked) {
+		query["win"] = "t";
+	}
+	if (document.getElementById("mac_checkbox").checked) {
+		query["mac"] = "t";
+	}
+	if (document.getElementById("linux_checkbox").checked) {
+		query["linux"] = "t";
+	}
+
+	var queryString = "";
+	for (var key in query) {
+		queryString += key + "=" + query[key] + "&";
+	}
+	if (queryString !== "") {
+		queryString = queryString.substring(0, queryString.length - 1);
+	}
+
+	loadPage(queryString, true);
+}
+
+function fillSearchFields() {
+	var params = new URLSearchParams(location.search);
+
+	var name = params.get("name");
+	if (name) {
+		document.getElementById("name_field").value = name;
+	}
+
+	var tags = params.get("tags");
+	if (tags) {
+		tags.split(",").forEach(addTag);
+	}
+
+	var price = params.get("price");
+	if (price) {
+		setPrice(price);
+	}
+
+	var from = params.get("from");
+	if (from) {
+		from = from.split("-");
+		document.getElementById("from_year").value = from[0];
+		document.getElementById("from_month").value = from[1];
+		document.getElementById("from_day").value = from[2];
+	}
+
+	var to = params.get("to");
+	if (to) {
+		to = to.split("-");
+		document.getElementById("to_year").value = to[0];
+		document.getElementById("to_month").value = to[1];
+		document.getElementById("to_day").value = to[2];
+	}
+
+	var date = params.get("date");
+	if (date) {
+		document.getElementById("date_preset").options.selectedIndex = ["week", "week2", "month", "season", "year"].indexOf(date) + 1;
+	}
+
+	if (params.get("vr")) {
+		document.getElementById("vr_checkbox").checked = true;
+	}
+	if (params.get("win")) {
+		document.getElementById("windows_checkbox").checked = true;
+	}
+	if (params.get("mac")) {
+		document.getElementById("mac_checkbox").checked = true;
+	}
+	if (params.get("linux")) {
+		document.getElementById("linux_checkbox").checked = true;
+	}
+}
+
+function addTag(name) {
+	document.getElementById("tags").innerHTML += '<div class="search_tag" onclick="remove(this)">' + name + '</div>';
+}
+
+function remove(element) {
+	element.outerHTML = "";
+}
+
+function setPrice(price) {
+	document.getElementById("price_field").value = price;
+}
+
+function setDatePreset(bool) {
+	useDatePreset = bool && document.getElementById("date_preset").options.selectedIndex !== 0;
+}
+
+function getMonthDays(m, y) {
+	m = parseInt(m);
+	y = parseInt(y);
+	if (m in [1, 3, 5, 7, 8, 10, 12]) {
+		return 31;
+	} else if (m === 2) {
+		if (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0)) {
+			return 29;
+		} else {
+			return 28;
+		}
+	} else {
+		return 30;
+	}
+}
