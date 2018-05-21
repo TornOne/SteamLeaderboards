@@ -1,5 +1,4 @@
 addEventListener("DOMContentLoaded", checkLoggedIn);
-addEventListener("DOMContentLoaded", fillSearchFields);
 
 function checkLoggedIn() {
 	if (localStorage.getItem("refreshTime") && localStorage.getItem("steamId") && localStorage.getItem("steamName") && localStorage.getItem("steamAvatar")) {
@@ -136,8 +135,12 @@ addEventListener("popstate", function() {
 });
 
 //Search stuff
+addEventListener("DOMContentLoaded", fillSearchFields);
+addEventListener("DOMContentLoaded", gatherTags);
 
 var useDatePreset = false;
+var allTags = [];
+var selectedTags = [];
 
 function search() {
 	if (!(isSearchBottom || isSearchHidden)) {
@@ -266,6 +269,51 @@ function fillSearchFields() {
 	if (params.get("linux")) {
 		document.getElementById("linux_checkbox").checked = true;
 	}
+}
+
+function gatherTags() {
+	allTags = document.getElementById("raw_tag_list").innerHTML.split(",");
+}
+
+function updateTagList(input) {
+	if (input.value.length < 2) {
+		showTagSearch(false);
+		return;
+	} else {
+		showTagSearch(true);
+	}
+
+	var suitableTags = [];
+	for (var i = 0; i < allTags.length; i++) {
+		if (allTags[i].toLowerCase().includes(input.value.toLowerCase()) && !selectedTags.includes(allTags[i])) {
+			suitableTags.push(allTags[i]);
+			if (suitableTags.length === 5) {
+				break;
+			}
+		}
+	}
+
+	var elementString = "";
+	for (i = 0; i < suitableTags.length; i++) {
+		elementString += '<div onmousedown="selectTag(this)">' + suitableTags[i] + '</div>'
+	}
+	document.getElementById("tag_list").innerHTML = elementString;
+}
+
+var tagSearchShown = false;
+function showTagSearch(bool) {
+	if (tagSearchShown && !bool) {
+		document.getElementById("tag_list").setAttribute("hidden", "hidden");
+		tagSearchShown = false;
+	} else if (!tagSearchShown && bool) {
+		document.getElementById("tag_list").removeAttribute("hidden");
+		tagSearchShown = true;
+	}
+}
+
+function selectTag(element) {
+	addTag(element.innerHTML);
+	document.getElementById("tag_field").value = "";
 }
 
 function addTag(name) {

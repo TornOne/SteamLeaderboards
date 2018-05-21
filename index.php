@@ -30,13 +30,11 @@ if ($next_refresh < 0) {
 		<div class="search_block_header">Filter by tags</div>
 		<div class="search_block">
 			<div id="tags"></div>
-			<div class="tag_field_class"><input id="tag_field" placeholder="Search for tags" list="tag_list"/></div>
-			<datalist id="tag_list">
-				<?php
-				$tag_string = pg_fetch_result(pg_query($conn, "SELECT value FROM config_strings WHERE key = 'tags';"), 0, 0);
-				$all_tags = explode(",", $tag_string);
-				foreach ($all_tags as $tag) { ?><option value="<?=$tag?>"></option><?php } ?>
-			</datalist>
+			<div class="tag_field_class">
+				<input id="tag_field" placeholder="Search for tags" oninput="updateTagList(this)"/>
+				<div id="tag_list" hidden="hidden"></div>
+			</div>
+			<span id="raw_tag_list" hidden="hidden"><?=pg_fetch_result(pg_query($conn, "SELECT value FROM config_strings WHERE key = 'tags';"), 0, 0)?></span>
 		</div>
 
 		<div class="search_block_header">Filter by max price</div>
