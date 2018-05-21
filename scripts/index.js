@@ -149,7 +149,10 @@ function search() {
 
 	var query = {};
 
-	document.getElementById("name_field"); //TODO
+	var gameName = document.getElementById("name_field");
+	if (gameName) {
+		query["name"] = gameName.value;
+	}
 
 	var tagElements = document.getElementsByClassName("search_tag");
 	var tags = [];
