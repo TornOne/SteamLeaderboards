@@ -410,17 +410,13 @@ a.page_button {
 	text-align: center;
 }
 
-#from_day, #from_month, #from_year {
-	margin: 0.5em 0 0.2em;
-}
-
-#to_day, #to_month, #to_year {
-	margin: 0.2em 0 0.5em;
+#date_div {
+	margin: 0.3em 0;
 }
 
 #from_clear_button, #to_clear_button {
 	font-size: 1em;
-	line-height: 1em;
+	vertical-align: sub;
 	border: none;
 	margin: 0;
 	padding: 0;
@@ -487,11 +483,6 @@ input:checked ~ .check_mark {
 }
 
 #name_field {
-	/*background-color: rgba(103, 193, 245, 0.2);
-	border: 0.1em solid #000000;
-	border-radius: 0.3em;
-	padding: 0.3em;
-	color: #ffffff;*/
 	margin: 0 0.5em 0.5em;
 	width: 90%;
 }

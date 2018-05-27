@@ -47,17 +47,22 @@ if ($next_refresh < 0) {
 
 		<div class="search_block_header">Filter by release date</div>
 		<div class="search_block">
-			<span class="date_text">From:</span>
-			<input id="from_day" type="text" placeholder="dd" pattern="[0-2]?[1-9]|[1-3]0|31" onchange="setDatePreset(false);"/>
-			<input id="from_month" type="text" placeholder="mm" pattern="0?[1-9]|1[0-2]" onchange="setDatePreset(false);"/>
-			<input id="from_year" type="text" placeholder="yyyy" pattern="\d{4}" onchange="setDatePreset(false);"/>
-			<input id="from_clear_button" type="button" onclick="setFrom('--')"/>
-			<br/>
-			<span class="date_text">To:</span>
-			<input id="to_day" type="text" placeholder="dd" pattern="[0-2]?[1-9]|[1-3]0|31" onchange="setDatePreset(false);"/>
-			<input id="to_month" type="text" placeholder="mm" pattern="0?[1-9]|1[0-2]" onchange="setDatePreset(false);"/>
-			<input id="to_year" type="text" placeholder="yyyy" pattern="\d{4}" onchange="setDatePreset(false);"/>
-			<input id="to_clear_button" type="button" onclick="setTo('--')"/>
+			<div id="date_div">
+				<span class="date_text">From:</span>
+				<input id="from_day" type="text" placeholder="dd" pattern="[0-2]?[1-9]|[1-3]0|31" onchange="setDatePreset(false);"/>
+				<input id="from_month" type="text" placeholder="mm" pattern="0?[1-9]|1[0-2]" onchange="setDatePreset(false);"/>
+				<input id="from_year" type="text" placeholder="yyyy" pattern="\d{4}" onchange="setDatePreset(false);"/>
+				<input id="from_clear_button" type="button" onclick="setFrom('--')"/>
+			</div>
+
+			<div id="date_div">
+				<span class="date_text">To:</span>
+				<input id="to_day" type="text" placeholder="dd" pattern="[0-2]?[1-9]|[1-3]0|31" onchange="setDatePreset(false);"/>
+				<input id="to_month" type="text" placeholder="mm" pattern="0?[1-9]|1[0-2]" onchange="setDatePreset(false);"/>
+				<input id="to_year" type="text" placeholder="yyyy" pattern="\d{4}" onchange="setDatePreset(false);"/>
+				<input id="to_clear_button" type="button" onclick="setTo('--')"/>
+			</div>
+
 			<span class="date_text"></span>
 			<select id="date_preset" onchange="setDatePreset(true);">
 				<option value="placeholder">Select a preset</option>
