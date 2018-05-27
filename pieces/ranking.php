@@ -95,18 +95,18 @@
 		$pagenr = 1;
 	}
 
+	$where_params_length = count($where_params);
 	if (isset($_GET["name"])) {
 		$where_params[] = "%" . $_GET["name"] . "%";
 		$query_result = pg_query_params($conn, "SELECT row_number FROM (SELECT name, row_number() OVER() FROM top_games" . $where_query . ") AS win WHERE name ILIKE $" . count($where_params) . " LIMIT 1;", $where_params);
 		if ($query_result) {
 			$pagenr = ceil(pg_fetch_result($query_result, 0, 0) / 25);
-		} 
+		}
 	}
 
 	$offset = ($pagenr - 1) * 25;
-	$where_params_length = count($where_params);
-	$where_params[$where_params_length - 1] = $offset;
-	$games = pg_query_params($conn, "SELECT * FROM top_games" . $where_query . " LIMIT 25 OFFSET $" . $where_params_length . ";", $where_params);
+	$where_params[$where_params_length] = $offset;
+	$games = pg_query_params($conn, "SELECT * FROM top_games" . $where_query . " LIMIT 25 OFFSET $" . count($where_params) . ";", $where_params);
 
 	while ($row = pg_fetch_row($games)) {
 		$offset++;
