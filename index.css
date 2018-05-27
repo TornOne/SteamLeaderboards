@@ -412,6 +412,7 @@ a.page_button {
 
 #date_div {
 	margin: 0.3em 0;
+	white-space: nowrap;
 }
 
 #from_clear_button, #to_clear_button {
@@ -431,6 +432,7 @@ a.page_button {
 	-webkit-appearance: none;
 	appearance: none;
 	width: 68%;
+	padding: 0.2em;
 	cursor: pointer;
 }
 
