@@ -3,6 +3,10 @@ CREATE TABLE games (appid integer PRIMARY KEY, name text, rating real, votes int
 CREATE VIEW top_games AS
 SELECT * FROM games ORDER BY score DESC;
 
+CREATE EXTENSION pg_trgm;
+
+CREATE INDEX game_name_index ON games USING GIN (name gin_trgm_ops);
+
 CREATE INDEX game_order_index ON games (score DESC);
 
 CREATE INDEX game_release_index ON games (release);

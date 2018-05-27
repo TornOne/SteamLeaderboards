@@ -149,9 +149,9 @@ function search() {
 
 	var query = {};
 
-	var gameName = document.getElementById("name_field");
-	if (gameName) {
-		query["name"] = gameName.value;
+	var gameName = document.getElementById("name_field").value;
+	if (gameName.length > 1) {
+		query["name"] = gameName;
 	}
 
 	var tagElements = document.getElementsByClassName("search_tag");
