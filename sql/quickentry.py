@@ -20,7 +20,7 @@ def get_user_tables():
 def print_user_tables():
     print "Schema name\tTable name\tOwner name"
     for row in get_user_tables():
-        print row[0] + "\t" + row[1] + "\t" + row[2]
+        print row[0], "\t", row[1], "\t", row[2]
 
 def get_system_views():
     return query("SELECT viewname, definition FROM pg_views WHERE schemaname = 'pg_catalog';")
@@ -46,6 +46,14 @@ def print_user_functions():
         print row[0], "\t", row[1], "\t", row[2]
         print row[-4]
         print
+
+def get_user_indexes():
+    return query("SELECT tablename, indexname, indexdef FROM pg_indexes WHERE schemaname != 'pg_catalog';")
+
+def print_user_indexes():
+    print "Table name\tIndex name\tDefinition"
+    for row in get_user_indexes():
+        print row[0], "\t", row[1], "\t" + row[2]
 
 #EXPLAIN ANALYZE ...
 

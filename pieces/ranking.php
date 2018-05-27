@@ -99,8 +99,8 @@
 	if (isset($_GET["name"])) {
 		$where_params[] = "%" . $_GET["name"] . "%";
 		$query_result = pg_query_params($conn, "SELECT row_number FROM (SELECT name, row_number() OVER() FROM top_games" . $where_query . ") AS win WHERE name ILIKE $" . count($where_params) . " LIMIT 1;", $where_params);
-		if ($query_result) {
-			$pagenr = ceil(pg_fetch_result($query_result, 0, 0) / 25);
+		if ($query_result = pg_fetch_row($query_result)) {
+			$pagenr = ceil($query_result[0] / 25);
 		}
 	}
 

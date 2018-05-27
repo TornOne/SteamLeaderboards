@@ -6,6 +6,8 @@
 	margin: auto;
 }
 
+/* Ranking stuff */
+
 #ranking {
 	min-width: 0;
 	width: 100%;
@@ -207,7 +209,7 @@
 	margin: auto;
 }
 
-/* ------------------------ */
+/* Page selector stuff */
 
 .page_selector {
 	text-align: center;
@@ -229,7 +231,7 @@ a.page_button {
 	border-radius: 0.3125em;
 }
 
-/* ------------------------ */
+/* Search stuff */
 
 #search_toggle {
 	font-size: 1em;
@@ -273,6 +275,7 @@ a.page_button {
 	background-color: rgba(0, 0, 0, 0.4);
 	padding: 0.3em 0.5em;
 	margin-bottom: 1em;
+	text-align: center;
 }
 
 .search_block_header {
@@ -292,22 +295,13 @@ a.page_button {
 	font-size: 0.875em;
 }
 
-#name_field {
-	background-color: rgba(103, 193, 245, 0.2);
-	border: 0.1em solid #000000;
-	border-radius: 0.3em;
-	padding: 0.3em;
-	color: #ffffff;
-	width: 65%;
-}
-
 #search_button, #price_0_button, #price_10_button, #price_20_button {
 	background-color: rgba(103, 193, 245, 0.2);
 	border: 0;
 	border-radius: 0.3em;
-	color: #67c1f5;
+	width: 50%;
 	height: 1.8em;
-	width: 27.5%;
+	color: #67c1f5;
 	cursor: pointer;
 }
 
@@ -351,7 +345,7 @@ a.page_button {
 	margin-top: 0.5em;
 }
 
-#tag_field, #price_field, #from_day, #from_month, #from_year, #to_day, #to_month, #to_year {
+#tag_field, #price_field, #from_day, #from_month, #from_year, #to_day, #to_month, #to_year, #name_field {
 	background-color: rgba(0, 0, 0, 0.2);
 	border: 0.1em solid #000000;
 	border-radius: 0.3em;
@@ -486,4 +480,14 @@ input[type=checkbox] {
 
 input:checked ~ .check_mark {
 	display: block;
+}
+
+#name_field {
+	/*background-color: rgba(103, 193, 245, 0.2);
+	border: 0.1em solid #000000;
+	border-radius: 0.3em;
+	padding: 0.3em;
+	color: #ffffff;*/
+	margin: 0 0.5em 0.5em;
+	width: 90%;
 }

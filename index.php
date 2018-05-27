@@ -23,7 +23,6 @@ if ($next_refresh < 0) {
 
 	<div id="search" hidden="hidden">
 		<div class="search_header">
-			<input id="name_field" placeholder="Search for a game"/>
 			<input id="search_button" type="button" value="Search" onclick="search()"/>
 		</div>
 
@@ -89,6 +88,8 @@ if ($next_refresh < 0) {
 				<span class="check_mark"></span>
 			</label>
 		</div>
+
+		<input id="name_field" placeholder="Find a game's ranking by name"/>
 	</div>
 </div>
 
