@@ -120,6 +120,11 @@ function loadPage(query, isNewPage) {
 		var searched = document.getElementsByClassName("searched");
 		if (searched.length === 1) {
 			searched[0].scrollIntoView({});
+			setIncorrectNameField(false);
+		} else if (params["name"]) {
+			setIncorrectNameField(true);
+		} else {
+			setIncorrectNameField(false);
 		}
 	};
 
@@ -173,7 +178,7 @@ function search() {
 	}
 
 	var price = document.getElementById("price_field").value;
-	if (price && /^\d{1,4}([\.,]\d{1,2})?$/.test(price)) {
+	if (price && /^\d{1,4}([.,]\d{1,2})?$/.test(price)) {
 		query["price"] = price;
 	}
 
@@ -371,6 +376,26 @@ function getMonthDays(m, y) {
 		}
 	} else {
 		return 30;
+	}
+}
+
+var isNameIncorrect = false;
+function setIncorrectNameField(bool) {
+	if (bool) {
+		var name_e = document.getElementById("name_field");
+		name_e.value = "";
+		if (!isNameIncorrect) {
+			isNameIncorrect = true;
+			name_e.placeholder = "No such game found";
+			name_e.classList.add("error");
+		}
+	} else {
+		if (isNameIncorrect) {
+			isNameIncorrect = false;
+			name_e = document.getElementById("name_field");
+			name_e.placeholder = "Find a game's ranking by name";
+			name_e.classList.remove("error");
+		}
 	}
 }
 

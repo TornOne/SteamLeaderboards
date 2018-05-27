@@ -488,3 +488,7 @@ input:checked ~ .check_mark {
 	margin: 0 0.5em 0.5em;
 	width: 90%;
 }
+
+.error {
+	box-shadow: 0 0 0 0.1em #ff0000;
+}
