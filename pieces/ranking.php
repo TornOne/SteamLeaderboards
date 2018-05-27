@@ -87,7 +87,7 @@
 		<?php $page_count = 1;
 	}
 	if (isset($_GET["page"]) && $_GET["page"] > 0) {
-		$pagenr = $_GET["page"];
+		$pagenr = (int) $_GET["page"];
 		if ($pagenr > $page_count) {
 			$pagenr = $page_count;
 		}
