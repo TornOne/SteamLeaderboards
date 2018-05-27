@@ -26,8 +26,15 @@ def listGames(pagenr):
             score = 0
         else:
             score = score[score.find("&lt;br&gt;") + 10:score.find(" user reviews")].split()
-            rating = float(score[0][:-1]) / 100
+            rating = int(score[0][:-1])
             votes = int(score[-1].replace(",", ""))
+            min_pos = rating * votes / 100
+            max_pos = min(rating + 1, 100) * votes / 100
+            if rating * votes % 100 != 0:
+                min_pos += 1
+            else:
+                max_pos -= 1
+            rating = float((min_pos + max_pos) / 2 if max_pos > min_pos else min_pos) / votes
             score = rating - (rating - 0.5) * math.pow(2, -math.log10(votes + 1))
         
         #Find date
@@ -118,6 +125,8 @@ def firstPass():
     return allGames
 
 def getPreciseScore(game):
+    if game[3] < 100: #Our initial guess is already exact
+        return (game[2], game[3], game[4])
     page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[10] <= 0 else "steam"))
     contents = json.loads(page.read())
     game[3] = contents["query_summary"]["total_reviews"]
