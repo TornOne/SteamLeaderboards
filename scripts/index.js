@@ -117,6 +117,10 @@ function loadPage(query, isNewPage) {
 		if (isNewPage) {
 			history.pushState(params, "Page " + params["page"], "?" + query);
 		}
+		var searched = document.getElementsByClassName("searched");
+		if (searched.length === 1) {
+			searched[0].scrollIntoView({});
+		}
 	};
 
 	req.open("GET", "/pieces/ranking.php?" + query);
@@ -137,6 +141,11 @@ addEventListener("popstate", function() {
 //Search stuff
 addEventListener("DOMContentLoaded", fillSearchFields);
 addEventListener("DOMContentLoaded", gatherTags);
+addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+		search();
+	}
+});
 
 var useDatePreset = false;
 var allTags = [];

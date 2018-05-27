@@ -103,6 +103,7 @@
 			$pagenr = ceil($query_result[0] / 25);
 		}
 	}
+	$game_index = $query_result ? $query_result[0] : -1;
 
 	$offset = ($pagenr - 1) * 25;
 	$where_params[$where_params_length] = $offset;
@@ -113,7 +114,7 @@
 		//appid, name, rating, votes, score, windows, mac, linux, vr, release, price, tags
 		//  0  ,  1  ,   2   ,   3  ,   4  ,    5   ,  6 ,   7  , 8 ,    9   ,  10  ,  11
 		?>
-		<a class="game_listing" href="http://store.steampowered.com/app/<?=$row[0]?>/">
+		<a class="game_listing<?php if ($offset == $game_index) echo " searched"; ?>" href="http://store.steampowered.com/app/<?=$row[0]?>/">
 			<img alt="<?=$row[1]?>" src="http://cdn.akamai.steamstatic.com/steam/apps/<?=$row[0]?>/capsule_231x87.jpg"/>
 			<span class="<?php
 			if ($offset < 10):
