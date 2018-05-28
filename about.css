@@ -2,9 +2,24 @@
 	background-color: #171a21;
 }
 
-.about p {
+.about h2 {
+	text-align: center;
+	font-size: 1.5em;
+	padding: 1.5em 0 0.5em;
+	margin: 0;
+}
+
+.about p, .about ul {
 	margin: auto;
 	padding: 0.5em;
 	max-width: 56.25em;
 	text-align: justify;
+}
+
+.about a {
+	color: #67c1f5;
+}
+
+.about a:visited {
+	color: #417a9b;
 }
