@@ -1,4 +1,5 @@
 import urllib, json, math, os, psycopg2, multiprocessing
+import httplib #Maybe temporary due to tags breaking
 
 #appid, name, rating, votes, score, windows, mac, linux, vr, release, price, tags
 #  0  ,  1  ,   2   ,   3  ,   4  ,    5   ,  6 ,   7  , 8 ,    9   ,  10  ,  11
@@ -141,13 +142,16 @@ def getPreciseScore(game):
 def getTags(game):
     #Method not working, maybe again in the future
     #page = urllib.urlopen("http://store.steampowered.com/apphoverpublic/" + game[0])
-    page = urllib.urlopen("http://store.steampowered.com/app/" + game[0])
-    contents = page.read()
+    #contents = page.read()
     #tags = contents.split('<div class="app_tag">')
-    if "Here are frequently applied tags that people have used when describing this product:" in contents:
-        tags = contents.split('class="app_tag" >')
-    else:
-        tags = contents.split('class="app_tag" style="display: none;">')
+    
+    conn = httplib.HTTPSConnection("store.steampowered.com")
+    conn.request("GET", "/app/" + game[0] + "/", "", {"Content-Type": "application/x-www-form-urlencoded", "Cookie": "lastagecheckage=3-April-1997; mature_content=1; birthtime=860014801"})
+    response = conn.getresponse()
+    contents = response.read()
+    conn.close()
+    tags = contents.split('class="app_tag" style="display: none;">')
+    
     #Only the top 75% of the tags, which is an approximation of what Steam does
     for tag in tags[1:int(0.75 * (len(tags) + 1))]:
         game[11].append(tag[:tag.find("<")].strip()) #.strip() added for new method
