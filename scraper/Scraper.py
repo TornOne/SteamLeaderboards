@@ -139,12 +139,18 @@ def getPreciseScore(game):
     return (game[2], game[3], game[4])
 
 def getTags(game):
-    page = urllib.urlopen("http://store.steampowered.com/apphoverpublic/" + game[0])
+    #Method not working, maybe again in the future
+    #page = urllib.urlopen("http://store.steampowered.com/apphoverpublic/" + game[0])
+    page = urllib.urlopen("http://store.steampowered.com/app/" + game[0])
     contents = page.read()
-    tags = contents.split('<div class="app_tag">')
+    #tags = contents.split('<div class="app_tag">')
+    if "Here are frequently applied tags that people have used when describing this product:" in contents:
+        tags = contents.split('class="app_tag" >')
+    else:
+        tags = contents.split('class="app_tag" style="display: none;">')
     #Only the top 75% of the tags, which is an approximation of what Steam does
     for tag in tags[1:int(0.75 * (len(tags) + 1))]:
-        game[11].append(tag[:tag.find("<")])
+        game[11].append(tag[:tag.find("<")].strip()) #.strip() added for new method
     #Multiprocessing pools create new instances or something, so list values don't get updated and have to be assigned outside
     return game[11]
 
