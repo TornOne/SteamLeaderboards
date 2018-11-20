@@ -4,7 +4,7 @@ import urllib, json, math, os, psycopg2, multiprocessing
 #  0  ,  1  ,   2   ,   3  ,   4  ,    5   ,  6 ,   7  , 8 ,    9   ,  10  ,  11
 
 def listGames(pagenr):
-    page = urllib.urlopen("http://store.steampowered.com/search/results?sort_by=Released_DESC&category1=998&page=" + str(pagenr))
+    page = urllib.urlopen("http://store.steampowered.com/search/results?ignore_preferences=1&sort_by=Released_DESC&category1=998&page=" + str(pagenr))
     contents = page.read()
     contents = contents[contents.find("<!-- List Items -->"):contents.find("<!-- End List Items -->")]
     sections = contents.split("<a href=")[1:]
