@@ -80,7 +80,7 @@ def listGames(pagenr):
         #Find game name
         name = game[game.find('<span class="title">') + 20:]
         name = name[:name.find("</span>")]
-        name.replace("\\", "\\\\") #Sanitize app names
+        name = name.replace("\\", "\\\\") #Sanitize app names
 
         games.append([appid, name, rating, votes, score, windows, mac, linux, vr, date, price, []])
         
