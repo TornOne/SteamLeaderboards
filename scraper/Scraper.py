@@ -128,6 +128,7 @@ def firstPass():
 def getPreciseScore(game):
     if game[3] < 100: #Our initial guess is already exact
         return (game[2], game[3], game[4])
+    print(game[0])
     page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[10] <= 0 else "steam"))
     contents = json.loads(page.read())
     game[3] = contents["query_summary"]["total_reviews"]
