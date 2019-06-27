@@ -131,7 +131,7 @@ def getPreciseScore(game):
     page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[10] <= 0 else "steam"))
     try:
         contents = json.loads(page.read())
-    except Exception as e:
+    except Exception e:
         print(game[0], e)
     game[3] = contents["query_summary"]["total_reviews"]
     if game[3] != 0:
