@@ -164,74 +164,74 @@ def getTags(game):
 
 #Multiprocessing, 15 processes, should take about 20 minutes for the foreseeable future
 if __name__ == "__main__":
-    #try:
-    pool = multiprocessing.Pool(15)
+    try:
+        pool = multiprocessing.Pool(15)
 
-    games = firstPass()
-    newScores = pool.map(getPreciseScore, games)
-    tags = pool.map(getTags, games)
-    for i in range(len(games)):
-        for j in range(3):
-            games[i][j + 2] = newScores[i][j]
-        games[i][11] = tags[i]
-    games.sort(key = lambda game: game[4])
-    games.reverse()
+        games = firstPass()
+        newScores = pool.map(getPreciseScore, games)
+        tags = pool.map(getTags, games)
+        for i in range(len(games)):
+            for j in range(3):
+                games[i][j + 2] = newScores[i][j]
+            games[i][11] = tags[i]
+        games.sort(key = lambda game: game[4])
+        games.reverse()
 
-    #Filter out blacklisted tags and count all other tags
-    blacklist = []
-    fail = open("scraper/Blacklist.txt", "r")
-    for line in fail:
-        blacklist.append(line[:-1])
-    fail.close()
-    tagCounts = {}
-    for game in games:
-        i = 0
-        while i < len(game[11]):
-            if (game[11][i] in blacklist):
-                del game[11][i]
-            else:
-                try:
-                    tagCounts[game[11][i]] += 1
-                except:
-                    tagCounts[game[11][i]] = 1
-                i += 1
+        #Filter out blacklisted tags and count all other tags
+        blacklist = []
+        fail = open("scraper/Blacklist.txt", "r")
+        for line in fail:
+            blacklist.append(line[:-1])
+        fail.close()
+        tagCounts = {}
+        for game in games:
+            i = 0
+            while i < len(game[11]):
+                if (game[11][i] in blacklist):
+                    del game[11][i]
+                else:
+                    try:
+                        tagCounts[game[11][i]] += 1
+                    except:
+                        tagCounts[game[11][i]] = 1
+                    i += 1
 
-    #Make an ordered list of the other tags
-    allTags = []
-    for tag in tagCounts:
-        allTags.append([tagCounts[tag], tag])
-    allTags.sort()
-    allTags.reverse()
-    tagString = ""
-    for tag in allTags:
-        tagString += tag[1].replace("'", "''").replace("&amp;", "&") + ","
-    tagString = tagString[:-1]
+        #Make an ordered list of the other tags
+        allTags = []
+        for tag in tagCounts:
+            allTags.append([tagCounts[tag], tag])
+        allTags.sort()
+        allTags.reverse()
+        tagString = ""
+        for tag in allTags:
+            tagString += tag[1].replace("'", "''").replace("&amp;", "&") + ","
+        tagString = tagString[:-1]
 
-    #Save results to file
-    fail = open("games.txt", "w")
-    for game in games:
-        fail.write(game[0] + "\t" + game[1] + "\t")
-        for i in range(2, 9):
-            fail.write(str(game[i]) + "\t")
-        fail.write(str(game[9] / 10000) + "-" + str((game[9] % 10000) / 100) + "-" + str(game[9] % 100) + "\t")
-        fail.write(("\\N" if game[10] < 0 else str(game[10])) + "\t{")
-        for tag in game[11][:-1]:
-            fail.write(tag + ", ")
-        fail.write((game[11][-1] if len(game[11]) else "") + "}\n")
-    fail.close()
+        #Save results to file
+        fail = open("games.txt", "w")
+        for game in games:
+            fail.write(game[0] + "\t" + game[1] + "\t")
+            for i in range(2, 9):
+                fail.write(str(game[i]) + "\t")
+            fail.write(str(game[9] / 10000) + "-" + str((game[9] % 10000) / 100) + "-" + str(game[9] % 100) + "\t")
+            fail.write(("\\N" if game[10] < 0 else str(game[10])) + "\t{")
+            for tag in game[11][:-1]:
+                fail.write(tag + ", ")
+            fail.write((game[11][-1] if len(game[11]) else "") + "}\n")
+        fail.close()
 
-    #Save results to database
-    conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-    with conn:
-        with conn.cursor() as curs:
-            curs.execute("DELETE FROM games;")
-            curs.copy_from(open("games.txt", "r"), "games")
-            curs.execute("UPDATE config_strings SET value = '" + tagString + "' WHERE key = 'tags';")
-            curs.execute("SELECT update_completed_refresh_time();")
-    conn.close()
-##    except:
-##        conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-##        with conn:
-##            with conn.cursor() as curs:
-##                curs.execute("SELECT update_failed_refresh_time();")
-##        conn.close()
+        #Save results to database
+        conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+        with conn:
+            with conn.cursor() as curs:
+                curs.execute("DELETE FROM games;")
+                curs.copy_from(open("games.txt", "r"), "games")
+                curs.execute("UPDATE config_strings SET value = '" + tagString + "' WHERE key = 'tags';")
+                curs.execute("SELECT update_completed_refresh_time();")
+        conn.close()
+    except:
+        conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+        with conn:
+            with conn.cursor() as curs:
+                curs.execute("SELECT update_failed_refresh_time();")
+        conn.close()
