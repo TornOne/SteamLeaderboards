@@ -160,7 +160,7 @@ def getTags(game):
 
 def normalizedScore(rating, reviews):
     weighted = rating - (rating - 0.5) * math.pow(reviews + 1, -0.25)
-    return weighted - math.sin(4 * math.PI * weighted) / (4 * math.PI)
+    return weighted - math.sin(4 * math.pi * weighted) / (4 * math.pi)
 
 #Multiprocessing, 15 processes, should take about 20 minutes for the foreseeable future
 if __name__ == "__main__":
