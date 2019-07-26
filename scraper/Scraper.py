@@ -35,7 +35,7 @@ def listGames(pagenr):
             else:
                 max_pos -= 1
             rating = float((min_pos + max_pos) / 2 if max_pos > min_pos else min_pos) / votes
-            score = rating - (rating - 0.5) * math.pow(2, -math.log10(votes + 1))
+            score = normalizedScore(rating, votes)
         
         #Find date
         date = game[game.find('<div class="col search_released responsive_secondrow">') + 54:]
@@ -135,7 +135,7 @@ def getPreciseScore(game):
         game[2] = float(contents["query_summary"]["total_positive"]) / game[3]
     else:
         game[2] = 0.5
-    game[4] = game[2] - (game[2] - 0.5) * math.pow(2, -math.log10(game[3] + 1))
+    game[4] = normalizedScore(game[2], game[3])
     #Multiprocessing pools create new instances or something, so list values don't get updated and have to be assigned outside
     return (game[2], game[3], game[4])
 
@@ -157,6 +157,10 @@ def getTags(game):
         game[11].append(tag[:tag.find("<")])
     #Multiprocessing pools create new instances or something, so list values don't get updated and have to be assigned outside
     return game[11]
+
+def normalizedScore(rating, reviews):
+    weighted = rating - (rating - 0.5) * math.pow(reviews + 1, -0.25)
+    return weighted - math.sin(4 * math.PI * weighted) / (4 * math.PI)
 
 #Multiprocessing, 15 processes, should take about 20 minutes for the foreseeable future
 if __name__ == "__main__":
