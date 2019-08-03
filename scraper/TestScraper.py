@@ -130,6 +130,8 @@ def getPreciseScore(game):
         return (game[2], game[3], game[4])
     page = urllib.urlopen("http://store.steampowered.com/appreviews/" + game[0] + "?json=1&filter=all&language=all&review_type=all&purchase_type=" + ("all" if game[10] <= 0 else "steam"))
     contents = json.loads(page.read())
+    if contents["success"] != 1: #Keep the current scores in case of unsuccess
+        return (game[2], game[3], game[4])
     game[3] = contents["query_summary"]["total_reviews"]
     if game[3] != 0:
         game[2] = float(contents["query_summary"]["total_positive"]) / game[3]
