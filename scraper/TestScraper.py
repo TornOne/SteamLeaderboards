@@ -121,7 +121,7 @@ def firstPass():
 
     #Filter out low scores
     allGames.sort(key = lambda game: game[4])
-    allGames = allGames[-9750:] #Database 10K row limit
+    allGames = allGames[-9975:] #Database 10K row limit
     
     return allGames
 
